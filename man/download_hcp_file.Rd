@@ -11,7 +11,7 @@ download_hcp_file(path_to_file, destfile = NULL, ...)
 
 \item{destfile}{Destination filename}
 
-\item{...}{arguments to pass to \code{\link{aws_query_string_auth_url}}}
+\item{...}{arguments to pass to \code{\link{hcp_aws_url}}}
 }
 \value{
 Output filename that was downloaded

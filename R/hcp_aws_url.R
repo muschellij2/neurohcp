@@ -13,12 +13,12 @@
 #'
 #' @examples \dontrun{
 #' path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
-#' aws_query_string_auth_url(path_to_file)
+#' hcp_aws_url(path_to_file)
 #' }
 #' @importFrom digest hmac
 #' @importFrom base64enc base64encode
 #' @importFrom utils URLencode
-aws_query_string_auth_url <- function(
+hcp_aws_url <- function(
   path_to_file,
   bucket = "hcp-openaccess",
   region = "us-east-1",
@@ -41,7 +41,7 @@ aws_query_string_auth_url <- function(
                              bucket, "/", path_to_file)
 
   signature <- digest::hmac(
-    enc2utf8(access_key),
+    enc2utf8(secret_key),
     enc2utf8(canonical_string),
     "sha1",
     raw = TRUE)
@@ -53,7 +53,7 @@ aws_query_string_auth_url <- function(
   authenticated_url <- paste0(
     "https://s3.amazonaws.com/",
     bucket, "/", path_to_file,
-    "?AWSAccessKeyId=", enc2utf8(secret_key),
+    "?AWSAccessKeyId=", enc2utf8(access_key),
     "&Expires=", expiration_time,
     "&Signature=", signature_url_encoded)
 

@@ -7,13 +7,13 @@
 get_hcp_file(...)
 }
 \arguments{
-\item{...}{arguments to pass to \code{\link{aws_query_string_auth_url}}}
+\item{...}{arguments to pass to \code{\link{hcp_aws_url}}}
 }
 \value{
 Result of \code{GET}
 }
 \description{
-Wraps a \code{\link{aws_query_string_auth_url}} to a \code{GET}
+Wraps a \code{\link{hcp_aws_url}} to a \code{GET}
 statement to get the file
 }
 
