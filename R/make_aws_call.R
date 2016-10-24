@@ -18,7 +18,7 @@
 #' @importFrom base64enc base64encode
 #' @importFrom utils URLencode
 make_aws_call <- function(
-  path_to_file = "",
+  path_to_file = "/",
   bucket = "hcp-openaccess",
   region = "us-east-1",
   access_key = NULL,

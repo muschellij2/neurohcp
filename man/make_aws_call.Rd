@@ -4,7 +4,7 @@
 \alias{make_aws_call}
 \title{Construct AWS S3 Call}
 \usage{
-make_aws_call(path_to_file = "", bucket = "hcp-openaccess",
+make_aws_call(path_to_file = "/", bucket = "hcp-openaccess",
   region = "us-east-1", access_key = NULL, secret_key = NULL,
   lifetime_minutes = 5, query = NULL)
 }
