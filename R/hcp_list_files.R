@@ -50,8 +50,12 @@ hcp_list_files = function(
 #' @rdname hcp_list_files
 #' @export
 hcp_list_dirs = function(
+  prefix = "",
   delimiter = "/",
   ...
 ) {
-  return(hcp_list_files(..., delimiter = delimiter))
+  if (!grepl("/$", prefix)) {
+    prefix = paste0(prefix, "/")
+  }
+  return(hcp_list_files(..., prefix = prefix, delimiter = delimiter))
 }

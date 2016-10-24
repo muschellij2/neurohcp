@@ -7,7 +7,7 @@
 \usage{
 hcp_list_files(prefix = "", delimiter = "", query = NULL, ...)
 
-hcp_list_dirs(delimiter = "/", ...)
+hcp_list_dirs(prefix = "", delimiter = "/", ...)
 }
 \arguments{
 \item{prefix}{directory folder to list files.  If \code{""}, then it will be
