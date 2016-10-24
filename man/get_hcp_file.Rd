@@ -8,6 +8,8 @@ get_hcp_file(..., verbose = TRUE)
 }
 \arguments{
 \item{...}{arguments to pass to \code{\link{hcp_aws_url}}}
+
+\item{verbose}{Should the URL be printed?}
 }
 \value{
 Result of \code{GET}

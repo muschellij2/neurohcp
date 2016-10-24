@@ -2,6 +2,7 @@
 #' @description Wraps a \code{\link{hcp_aws_url}} to a \code{GET}
 #' statement to get the file
 #' @param ... arguments to pass to \code{\link{hcp_aws_url}}
+#' @param verbose Should the URL be printed?
 #'
 #' @return Result of \code{GET}
 #' @export

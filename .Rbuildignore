@@ -2,4 +2,5 @@
 ^\.Rproj\.user$
 
 download_hcp_csvs.R
-data/hcp_csvs/*
+data/HCP_csvs/*
+data/HCP_900_csvs/*
