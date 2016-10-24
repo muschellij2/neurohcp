@@ -6,7 +6,7 @@
 \usage{
 make_aws_call(path_to_file = "/", bucket = "hcp-openaccess",
   region = "us-east-1", access_key = NULL, secret_key = NULL,
-  lifetime_minutes = 5, query = NULL)
+  lifetime_minutes = 5, query = NULL, VERB = "GET")
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}
@@ -20,6 +20,10 @@ make_aws_call(path_to_file = "/", bucket = "hcp-openaccess",
 \item{secret_key}{Amazon S3 Secret Key}
 
 \item{lifetime_minutes}{Time that connection can be opened}
+
+\item{query}{additional query to add to \code{VERB} command}
+
+\item{VERB}{httr VERB to be used}
 }
 \value{
 Character of the url to be passed to \code{httr} VERBs

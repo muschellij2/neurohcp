@@ -20,6 +20,8 @@ hcp_aws_url(path_to_file = "", bucket = "hcp-openaccess",
 \item{secret_key}{Amazon S3 Secret Key}
 
 \item{lifetime_minutes}{Time that connection can be opened}
+
+\item{query}{additional query to add to url}
 }
 \value{
 Character of the url to be passed to \code{httr} VERBs

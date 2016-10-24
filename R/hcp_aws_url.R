@@ -7,6 +7,7 @@
 #' @param access_key Amazon S3 Access Key
 #' @param secret_key Amazon S3 Secret Key
 #' @param lifetime_minutes Time that connection can be opened
+#' @param query additional query to add to url
 #'
 #' @return Character of the url to be passed to \code{httr} VERBs
 #' @export
