@@ -19,7 +19,9 @@ This parses the result from \code{\link{hcp_list_files}} and
 organizes the files into \code{data.frame}s
 }
 \examples{
-ret = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion")
-parsed = parse_list_files(ret)
+if (have_aws_key()){
+   ret = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion")
+        parsed = parse_list_files(ret)
+ }
 }
 

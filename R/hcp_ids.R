@@ -24,5 +24,5 @@ hcp_ids = function(group = c("HCP", "HCP_900")) {
   names(pc) = NULL
   pc = gsub(prefix, "", pc, fixed = TRUE)
   pc = sub("/$", "", pc)
-  retur(pc)
+  return(pc)
 }
