@@ -1,7 +1,7 @@
 Package: hcp
 Type: Package
 Title: Human Connectome Project
-Version: 0.2
+Version: 0.2.1
 Date: 2016-10-08
 Author: John Muschelli <muschellij2@gmail.com>
 Maintainer: John Muschelli <muschellij2@gmail.com>
@@ -14,6 +14,7 @@ Imports:
     digest,
     httr,
     utils,
+    xml2,
     base64enc
 RoxygenNote: 5.0.1.9000
 URL: https://db.humanconnectome.org

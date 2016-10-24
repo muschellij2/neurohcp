@@ -19,43 +19,35 @@
 #' @importFrom base64enc base64encode
 #' @importFrom utils URLencode
 hcp_aws_url <- function(
-  path_to_file,
+  path_to_file = "",
   bucket = "hcp-openaccess",
   region = "us-east-1",
   access_key = NULL,
   secret_key = NULL,
-  lifetime_minutes = 5) {
-  L = set_aws_api_key(
+  lifetime_minutes = 5,
+  query = NULL) {
+
+  L = make_aws_call(
+    path_to_file = path_to_file,
+    bucket = bucket,
+    region = region,
     access_key = access_key,
     secret_key = secret_key,
-    default_region = region)
+    lifetime_minutes = lifetime_minutes,
+    query = query)
 
-  access_key = L$access_key
-  secret_key = L$secret_key
-  region = L$default_region
+  authenticated_url = L$url
+  ending = L$path
+  query = query
 
-
-  expiration_time <- as.integer(Sys.time() + lifetime_minutes * 60)
-
-  canonical_string <- paste0("GET", "\n\n\n", expiration_time, "\n/",
-                             bucket, "/", path_to_file)
-
-  signature <- digest::hmac(
-    enc2utf8(secret_key),
-    enc2utf8(canonical_string),
-    "sha1",
-    raw = TRUE)
-
-  signature_url_encoded <- utils::URLencode(
-    base64enc::base64encode(signature),
-    reserved = TRUE)
+  query = paste0(names(query), "=", query )
+  query = paste(query, collapse = "&")
+  query = paste0("?", query)
 
   authenticated_url <- paste0(
     "https://s3.amazonaws.com/",
-    bucket, "/", path_to_file,
-    "?AWSAccessKeyId=", enc2utf8(access_key),
-    "&Expires=", expiration_time,
-    "&Signature=", signature_url_encoded)
+    ending,
+    query)
 
   return(authenticated_url)
 }
