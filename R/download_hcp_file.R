@@ -3,6 +3,7 @@
 #' @param path_to_file Path to file on HCP S3 Bucket
 #' @param destfile Destination filename
 #' @param verbose should progress be added to downloading?
+#' @param error Should the function error if the return was bad?
 #' @param ... arguments to pass to \code{\link{hcp_aws_url}}
 #'
 #' @return Output filename that was downloaded
@@ -15,7 +16,9 @@
 #' }
 download_hcp_file = function(path_to_file,
                              destfile = NULL,
-                             verbose = TRUE, ...) {
+                             verbose = TRUE,
+                             error = TRUE,
+                             ...) {
   if (is.null(destfile)) {
     destfile = file.path(tempdir(),
                         basename(path_to_file))
@@ -31,6 +34,8 @@ download_hcp_file = function(path_to_file,
   }
   ret <- do.call("GET", args)
 
-  stop_for_status(ret)
+  if (error) {
+    stop_for_status(ret)
+  }
   return(destfile)
 }

@@ -5,9 +5,9 @@
 \alias{hcp_list_files}
 \title{List files from HCP bucket}
 \usage{
-hcp_list_files(prefix = "", delimiter = "", query = NULL, ...)
+hcp_list_files(prefix = "", delimiter = NULL, query = NULL, ...)
 
-hcp_list_dirs(prefix = "", delimiter = "/", ...)
+hcp_list_dirs(prefix = "HCP/", ...)
 }
 \arguments{
 \item{prefix}{directory folder to list files.  If \code{""}, then it will be
@@ -31,7 +31,14 @@ Lists a set of files from an HCP bucket for a specific sub-folder
 if (have_aws_key()){
 x = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion",
    delimiter="bval")
+t1_niis = hcp_list_files(prefix ="HCP/100307/T1w",
+delimiter = ".nii.gz")
+all_dirs = hcp_list_dirs("HCP/")
 }
 
+if (have_aws_key()){
+ all_dirs = hcp_list_dirs("HCP/")
+ cr =parse_list_files(all_dirs)$prefixes
+}
 }
 

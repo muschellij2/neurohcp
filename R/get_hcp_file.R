@@ -6,8 +6,15 @@
 #' @return Result of \code{GET}
 #' @export
 #' @importFrom httr GET
-get_hcp_file = function(...) {
+get_hcp_file = function(..., verbose = TRUE) {
   url <- hcp_aws_url(...)
+  if (verbose) {
+    message(paste0("URL sent to GET\n", url))
+  }
   xy <- httr::GET(url)
+  if (verbose) {
+    # message("Output of GET\n")
+    # message(xy)
+  }
   return(xy)
 }

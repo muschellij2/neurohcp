@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+download_hcp_csvs.R
+data/hcp_csvs/*

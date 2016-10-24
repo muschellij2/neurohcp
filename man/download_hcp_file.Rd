@@ -4,7 +4,8 @@
 \alias{download_hcp_file}
 \title{Download HCP file}
 \usage{
-download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE, ...)
+download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE,
+  error = TRUE, ...)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}
@@ -12,6 +13,8 @@ download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE, ...)
 \item{destfile}{Destination filename}
 
 \item{verbose}{should progress be added to downloading?}
+
+\item{error}{Should the function error if the return was bad?}
 
 \item{...}{arguments to pass to \code{\link{hcp_aws_url}}}
 }

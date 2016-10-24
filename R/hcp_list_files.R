@@ -16,16 +16,20 @@
 #' if (have_aws_key()){
 #' x = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion",
 #'    delimiter="bval")
+#' t1_niis = hcp_list_files(prefix ="HCP/100307/T1w",
+#' delimiter = ".nii.gz")
+#' all_dirs = hcp_list_dirs("HCP/")
 #' }
 #'
 hcp_list_files = function(
   prefix = "",
-  delimiter = "",
+  delimiter = NULL,
   query = NULL,
   ...
 ) {
 
-  q = list(prefix = prefix, delimiter = delimiter)
+  q = list(prefix = prefix)
+  q$delimiter = delimiter
   query = c(q, query)
   ret = get_hcp_file(
     path_to_file = "",
@@ -49,13 +53,19 @@ hcp_list_files = function(
 
 #' @rdname hcp_list_files
 #' @export
+#' @examples
+#' if (have_aws_key()){
+#'  all_dirs = hcp_list_dirs("HCP/")
+#'  cr =parse_list_files(all_dirs)$prefixes
+#' }
 hcp_list_dirs = function(
-  prefix = "",
-  delimiter = "/",
+  prefix = "HCP/",
   ...
 ) {
   if (!grepl("/$", prefix)) {
     prefix = paste0(prefix, "/")
   }
-  return(hcp_list_files(..., prefix = prefix, delimiter = delimiter))
+  return(hcp_list_files(..., prefix = prefix, delimiter = "/"))
 }
+
+

@@ -4,7 +4,7 @@
 \alias{get_hcp_file}
 \title{Get HCP file}
 \usage{
-get_hcp_file(...)
+get_hcp_file(..., verbose = TRUE)
 }
 \arguments{
 \item{...}{arguments to pass to \code{\link{hcp_aws_url}}}

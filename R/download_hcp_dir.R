@@ -15,8 +15,8 @@
 #' @importFrom plyr m_ply
 #' @examples
 #' if (have_aws_key()) {
-#' prefix = "HCP/100307/release-notes"
-#' res = download_hcp_dir(prefix = prefix)
+#'    prefix = "HCP/100307/release-notes"
+#'    res = download_hcp_dir(prefix = prefix)
 #' }
 download_hcp_dir = function(
   prefix,
@@ -42,7 +42,7 @@ download_hcp_dir = function(
     sapply(sub_out_dirs[!de], dir.create, recursive = TRUE)
   }
   res$file = res$Key
-  m_ply(.fun = function(file, destfile) {
+  plyr::m_ply(.fun = function(file, destfile) {
     download_hcp_file(path_to_file = file,
                       destfile = destfile,
                       verbose = FALSE)
