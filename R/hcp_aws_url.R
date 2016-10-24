@@ -38,11 +38,18 @@ hcp_aws_url <- function(
 
   authenticated_url = L$url
   ending = L$path
-  query = query
+  query = L$query
 
-  query = paste0(names(query), "=", query )
-  query = paste(query, collapse = "&")
-  query = paste0("?", query)
+  if (!is.null(query)) {
+    nq = names(query)
+    stopifnot(!is.null(nq))
+    stopifnot(all(!nq %in% ""))
+    stopifnot(length(nq) == length(query))
+
+    query = paste0(nq, "=", query )
+    query = paste(query, collapse = "&")
+    query = paste0("?", query)
+  }
 
   authenticated_url <- paste0(
     "https://s3.amazonaws.com/",

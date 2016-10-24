@@ -57,8 +57,9 @@ make_aws_call <- function(
 
   q = list( "AWSAccessKeyId" = enc2utf8(access_key),
             "Expires" = expiration_time,
-            "Signature" = signature_url_encoded,
-            query)
+            "Signature" = signature_url_encoded)
+  q = c(q, query)
+
   authenticated_url <- paste0(
     "https://s3.amazonaws.com/"
     )
