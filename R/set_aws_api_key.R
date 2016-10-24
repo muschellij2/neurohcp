@@ -7,6 +7,7 @@
 #' \code{AWS_SECRET_ACCESS_KEY} system variable.
 #' @param default_region Amazon default region.  If \code{NULL} then looks at the
 #' \code{AWS_DEFAULT_REGION} system variable.
+#' @param error Should this function error if things are not specifed?
 #'
 #' @return List of \code{access_key}, \code{secret_key},
 #' and \code{default_region}
@@ -14,7 +15,8 @@
 set_aws_api_key = function(
   access_key = NULL,
   secret_key = NULL,
-  default_region = "us-east-1"){
+  default_region = "us-east-1",
+  error = TRUE){
 
   if (is.null(access_key)) {
     access_key = Sys.getenv("AWS_ACCESS_KEY_ID")
@@ -48,7 +50,20 @@ set_aws_api_key = function(
   not_null = !sapply(L, is.null)
   if (!all(not_null)) {
     miss = names(L)[!not_null]
-    stop(paste0(miss, collapse = " and "), " are not specified!")
+    if (error) {
+      stop(paste0(miss, collapse = " and "), " are not specified!")
+    }
   }
-return(L)
+  return(L)
+}
+
+#' @rdname set_aws_api_key
+#' @export
+have_aws_key = function() {
+  L = set_aws_api_key(error = FALSE)
+  not_null = !sapply(L, is.null)
+  if (!all(not_null)) {
+    return(FALSE)
+  }
+  return(TRUE)
 }

@@ -4,12 +4,14 @@
 \alias{download_hcp_file}
 \title{Download HCP file}
 \usage{
-download_hcp_file(path_to_file, destfile = NULL, ...)
+download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE, ...)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}
 
 \item{destfile}{Destination filename}
+
+\item{verbose}{should progress be added to downloading?}
 
 \item{...}{arguments to pass to \code{\link{hcp_aws_url}}}
 }
@@ -18,5 +20,11 @@ Output filename that was downloaded
 }
 \description{
 Downloads a file from HCP S3 Bucket
+}
+\examples{
+if (have_aws_key()){
+path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
+download_hcp_file(path_to_file = path_to_file)
+}
 }
 
