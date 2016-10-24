@@ -49,7 +49,8 @@ make_aws_call <- function(
 
   # CanonicalizedResource = ""
   canonical_string <- paste0(VERB, "\n\n\n",
-                             expiration_time, "\n/",
+                             expiration_time, "\n",
+                             ifelse(VERB == "GET", "/", ""),
                              ending)
   # canonical_string = sub("//$", "/", canonical_string)
 
