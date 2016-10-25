@@ -4,7 +4,8 @@
 \alias{download_hcp_dir}
 \title{Download an entire directory from HCP}
 \usage{
-download_hcp_dir(prefix, delimiter = "", outdir = tempfile(), ...)
+download_hcp_dir(prefix, delimiter = "", outdir = tempfile(),
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{prefix}{Folder to downlaod}
@@ -12,6 +13,8 @@ download_hcp_dir(prefix, delimiter = "", outdir = tempfile(), ...)
 \item{delimiter}{Delimiter for files}
 
 \item{outdir}{Output directory}
+
+\item{verbose}{Should diagnostic values be printed?}
 
 \item{...}{additional arguments to pass to \code{\link{hcp_list_files}}}
 }

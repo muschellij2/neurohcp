@@ -3,6 +3,7 @@
 #' @param prefix Folder to downlaod
 #' @param delimiter Delimiter for files
 #' @param outdir Output directory
+#' @param verbose Should diagnostic values be printed?
 #' @param ... additional arguments to pass to \code{\link{hcp_list_files}}
 #'
 #' @return List of return from calling \code{\link{hcp_list_files}},
@@ -20,6 +21,7 @@ download_hcp_dir = function(
   prefix,
   delimiter = "",
   outdir = tempfile(),
+  verbose = TRUE,
   ...) {
   ret = hcp_list_files(prefix = prefix,
                        delimiter = delimiter,
@@ -43,8 +45,9 @@ download_hcp_dir = function(
   plyr::m_ply(.fun = function(file, destfile) {
     download_hcp_file(path_to_file = file,
                       destfile = destfile,
-                      verbose = FALSE)
-  }, .data = res[, c("file", "destfile")], .progress = "text")
+                      verbose = verbose)
+  }, .data = res[, c("file", "destfile")],
+    .progress = ifelse(verbose, "text", "none"))
 
   fe = file.exists(res$destfile)
   if (!all(fe)) {
