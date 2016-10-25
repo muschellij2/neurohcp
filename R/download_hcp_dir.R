@@ -1,5 +1,3 @@
-
-
 #' @title Download an entire directory from HCP
 #' @description Downloads a directory/folder from HCP database
 #' @param prefix Folder to downlaod
