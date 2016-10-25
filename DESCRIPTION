@@ -15,7 +15,7 @@ Imports:
     httr,
     plyr,
     utils,
-    xml2,
+    xml2 (>= 1.0.0.9001),
     base64enc
 RoxygenNote: 5.0.1.9000
 URL: https://db.humanconnectome.org
