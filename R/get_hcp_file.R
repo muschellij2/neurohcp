@@ -1,21 +1,36 @@
 #' @title Get HCP file
-#' @description Wraps a \code{\link{hcp_aws_url}} to a \code{GET}
+#' @description Wraps a \code{\link{make_aws_call}} to a \code{GET}
 #' statement to get the file
-#' @param ... arguments to pass to \code{\link{hcp_aws_url}}
+#' @param ... arguments to pass to \code{\link{make_aws_call}}
 #' @param verbose Should the URL be printed?
+#' @param verb passed to \code{\link{VERB}}
 #'
 #' @return Result of \code{GET}
 #' @export
-#' @importFrom httr GET
-get_hcp_file = function(..., verbose = TRUE) {
-  url <- hcp_aws_url(...)
+#' @importFrom httr GET VERB
+get_hcp_file = function(...,
+                        verbose = TRUE,
+                        verb = "GET") {
+  url = hcp_aws_url(..., verb = verb)
+
   if (verbose) {
-    message(paste0("URL sent to GET\n", url))
+    message(paste0("URL sent to ", verb, "\n", url))
   }
-  xy <- httr::GET(url)
+  args = list(verb = verb,
+              url = url
+              )
+  # xy= httr::VERB(verb = verb, url = url)
+  xy = do.call("VERB", args)
   if (verbose) {
     # message("Output of GET\n")
     # message(xy)
   }
   return(xy)
 }
+
+#' @rdname get_hcp_file
+#' @export
+head_hcp_file = function(...) {
+  get_hcp_file(..., verb = "HEAD")
+}
+

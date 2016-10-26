@@ -8,6 +8,7 @@
 #' @param secret_key Amazon S3 Secret Key
 #' @param lifetime_minutes Time that connection can be opened
 #' @param query additional query to add to url
+#' @param verb httr VERB to be used
 #'
 #' @return Character of the url to be passed to \code{httr} VERBs
 #' @export
@@ -25,8 +26,10 @@ hcp_aws_url <- function(
   region = "us-east-1",
   access_key = NULL,
   secret_key = NULL,
-  lifetime_minutes = 5,
-  query = NULL) {
+  lifetime_minutes = 20,
+  query = NULL,
+  verb = "GET"
+  ) {
 
   L = make_aws_call(
     path_to_file = path_to_file,
@@ -35,7 +38,8 @@ hcp_aws_url <- function(
     access_key = access_key,
     secret_key = secret_key,
     lifetime_minutes = lifetime_minutes,
-    query = query)
+    query = query,
+    verb = verb)
 
   authenticated_url = L$url
   ending = L$path

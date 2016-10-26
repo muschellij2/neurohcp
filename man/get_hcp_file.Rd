@@ -2,20 +2,25 @@
 % Please edit documentation in R/get_hcp_file.R
 \name{get_hcp_file}
 \alias{get_hcp_file}
+\alias{head_hcp_file}
 \title{Get HCP file}
 \usage{
-get_hcp_file(..., verbose = TRUE)
+get_hcp_file(..., verbose = TRUE, verb = "GET")
+
+head_hcp_file(...)
 }
 \arguments{
-\item{...}{arguments to pass to \code{\link{hcp_aws_url}}}
+\item{...}{arguments to pass to \code{\link{make_aws_call}}}
 
 \item{verbose}{Should the URL be printed?}
+
+\item{verb}{passed to \code{\link{VERB}}}
 }
 \value{
 Result of \code{GET}
 }
 \description{
-Wraps a \code{\link{hcp_aws_url}} to a \code{GET}
+Wraps a \code{\link{make_aws_call}} to a \code{GET}
 statement to get the file
 }
 

@@ -6,13 +6,15 @@
 #' @param access_key Amazon S3 Access Key
 #' @param secret_key Amazon S3 Secret Key
 #' @param lifetime_minutes Time that connection can be opened
-#' @param query additional query to add to \code{VERB} command
-#' @param VERB httr VERB to be used
+#' @param query additional query to add to \code{verb} command
+#' @param verb httr VERB to be used
 #' @return Character of the url to be passed to \code{httr} VERBs
 #' @export
 #'
 #' @examples \dontrun{
-#' path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
+#' path_to_file <- paste0(
+#'    "HCP_900/100206/MNINonLinear/",
+#'    "100206.164k_fs_LR.wb.spec")
 #' make_aws_call(path_to_file)
 #' }
 #' @importFrom digest hmac
@@ -26,7 +28,7 @@ make_aws_call <- function(
   secret_key = NULL,
   lifetime_minutes = 5,
   query = NULL,
-  VERB = "GET") {
+  verb = "GET") {
 
   L = set_aws_api_key(
     access_key = access_key,
@@ -48,11 +50,20 @@ make_aws_call <- function(
   # ending = sub("^/", "", ending)
 
   # CanonicalizedResource = ""
-  canonical_string <- paste0(VERB, "\n\n\n",
-                             expiration_time, "\n",
-                             ifelse(VERB == "GET", "/", ""),
-                             ending)
-  # canonical_string = sub("//$", "/", canonical_string)
+  canonical_string <- paste0(
+    verb, "\n\n\n",
+    expiration_time, "\n",
+    ifelse(verb %in% c("GET", "HEAD"),
+           "/", ""),
+    ending)
+
+  # run_date = format(Sys.time(), "%a %b %d %X %Y")
+  # canonical_date_string <- paste0(
+  #   verb, "\n\n\n",
+  #   run_date, "\n",
+  #   ifelse(verb %in% c("GET", "HEAD"),
+  #          "/", ""),
+  #   ending)
 
   signature <- digest::hmac(
     enc2utf8(secret_key),
@@ -60,14 +71,34 @@ make_aws_call <- function(
     algo = "sha1",
     raw = TRUE)
 
+  # date_signature <- digest::hmac(
+  #   enc2utf8(secret_key),
+  #   enc2utf8(canonical_date_string),
+  #   algo = "sha1",
+  #   raw = TRUE)
+
+  signature = base64enc::base64encode(signature)
+  # date_signature = base64enc::base64encode(date_signature)
+
   signature_url_encoded <- utils::URLencode(
-    base64enc::base64encode(signature),
+    signature,
     reserved = TRUE)
+
+  # Authorization = paste0(
+  #   "AWS ",
+  #   enc2utf8(access_key),
+  #   ":",
+  #   date_signature)
 
   q = list( "AWSAccessKeyId" = enc2utf8(access_key),
             "Expires" = expiration_time,
-            "Signature" = signature_url_encoded)
+            "Signature" = signature_url_encoded
+  )
   q = c(q, query)
+
+  # L = list(
+  #   "Authorization" = Authorization,
+  #   "Date" = run_date)
 
   authenticated_url <- paste0(
     "https://s3.amazonaws.com"
@@ -75,7 +106,8 @@ make_aws_call <- function(
   L = list(
     url = authenticated_url,
     path = ending,
-    query = q)
+    query = q,
+    headers = L)
   attr(L, "canonical_string") = canonical_string
   # attr(L, "canonical_string") = canonical_string
 
