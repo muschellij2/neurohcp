@@ -49,7 +49,8 @@ download_hcp_dir = function(
     }
     download_hcp_file(path_to_file = file,
                       destfile = destfile,
-                      verbose = verbose)
+                      verbose = verbose,
+                      ...)
   }, res[, "file"], res[, "destfile"])
 
   fe = file.exists(res$destfile)
