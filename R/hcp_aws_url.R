@@ -9,6 +9,7 @@
 #' @param lifetime_minutes Time that connection can be opened
 #' @param query additional query to add to url
 #' @param verb httr VERB to be used
+#' @param sign Should the url be signed?
 #'
 #' @return Character of the url to be passed to \code{httr} VERBs
 #' @export
@@ -28,8 +29,9 @@ hcp_aws_url <- function(
   secret_key = NULL,
   lifetime_minutes = 20,
   query = NULL,
-  verb = "GET"
-  ) {
+  verb = "GET",
+  sign = TRUE
+) {
 
   L = make_aws_call(
     path_to_file = path_to_file,
@@ -58,8 +60,12 @@ hcp_aws_url <- function(
 
   authenticated_url <- paste0(
     "https://s3.amazonaws.com/",
-    ending,
-    query)
+    ending)
+  if (sign) {
+    authenticated_url = paste0(
+      authenticated_url,
+      query)
+  }
 
   return(authenticated_url)
 }

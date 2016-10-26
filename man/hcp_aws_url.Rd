@@ -6,7 +6,7 @@
 \usage{
 hcp_aws_url(path_to_file = "", bucket = "hcp-openaccess",
   region = "us-east-1", access_key = NULL, secret_key = NULL,
-  lifetime_minutes = 20, query = NULL, verb = "GET")
+  lifetime_minutes = 20, query = NULL, verb = "GET", sign = TRUE)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}
@@ -24,6 +24,8 @@ hcp_aws_url(path_to_file = "", bucket = "hcp-openaccess",
 \item{query}{additional query to add to url}
 
 \item{verb}{httr VERB to be used}
+
+\item{sign}{Should the url be signed?}
 }
 \value{
 Character of the url to be passed to \code{httr} VERBs
