@@ -1,7 +1,7 @@
 Package: hcp
 Type: Package
 Title: Human Connectome Project
-Version: 0.4.6
+Version: 0.4.7
 Date: 2016-10-08
 Author: John Muschelli <muschellij2@gmail.com>
 Maintainer: John Muschelli <muschellij2@gmail.com>
@@ -17,5 +17,6 @@ Imports:
     xml2 (>= 1.0.0.9001),
     base64enc
 RoxygenNote: 5.0.1.9000
+Remotes: hadley/xml2
 URL: https://db.humanconnectome.org
 BugReports: https://github.com/muschellij2/hcp/issues
