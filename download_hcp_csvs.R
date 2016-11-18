@@ -41,7 +41,7 @@ res = mapply(function(df, id) {
 }, res, ids, SIMPLIFY = FALSE)
 outname = paste0(tolower(group), "_scanning_info")
 df =  bind_rows(res)
-assign(outname, df)
+
 
 cn = c("Session_Day",
        "Acquisition_Time",
@@ -63,6 +63,8 @@ cn = c("Session_Day",
        "id")
 cn = tolower(cn)
 colnames(df) = cn
+
+assign(outname, df)
 
 outfile = file.path("data", paste0(outname, ".rda"))
 save(list = outname,
