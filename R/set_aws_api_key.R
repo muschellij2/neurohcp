@@ -1,6 +1,6 @@
-#' @title Amazon AWS Key
-#' @description Finds and returns the AWS keys.  This will error if not all are
-#' specified
+#' @title Set Amazon AWS Key
+#' @description Sets and returns the AWS keys.  This will error if not all are
+#' specified.
 #' @param access_key Amazon access key.  If \code{NULL} then looks at the
 #' \code{AWS_ACCESS_KEY_ID} system variable.
 #' @param secret_key Amazon secret key.  If \code{NULL} then looks at the

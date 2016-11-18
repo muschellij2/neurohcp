@@ -3,7 +3,7 @@
 \name{set_aws_api_key}
 \alias{have_aws_key}
 \alias{set_aws_api_key}
-\title{Amazon AWS Key}
+\title{Set Amazon AWS Key}
 \usage{
 set_aws_api_key(access_key = NULL, secret_key = NULL,
   default_region = "us-east-1", error = TRUE)
@@ -27,7 +27,7 @@ List of \code{access_key}, \code{secret_key},
 and \code{default_region}
 }
 \description{
-Finds and returns the AWS keys.  This will error if not all are
-specified
+Sets and returns the AWS keys.  This will error if not all are
+specified.
 }
 
