@@ -96,9 +96,3 @@ ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals")
 ```
 
 
-
-# Session Info
-
-```{r}
-devtools::session_info()
-```
