@@ -24,4 +24,3 @@ if (have_aws_key()){
         parsed = parse_list_files(ret)
  }
 }
-

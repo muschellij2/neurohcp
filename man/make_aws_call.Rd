@@ -39,4 +39,3 @@ path_to_file <- paste0(
 make_aws_call(path_to_file)
 }
 }
-

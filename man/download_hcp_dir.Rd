@@ -32,4 +32,3 @@ if (have_aws_key()) {
    res = download_hcp_dir(prefix = prefix)
 }
 }
-

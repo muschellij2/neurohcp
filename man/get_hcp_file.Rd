@@ -23,4 +23,3 @@ Result of \code{GET}
 Wraps a \code{\link{make_aws_call}} to a \code{GET}
 statement to get the file
 }
-

@@ -21,4 +21,3 @@ head(hcp_ids("HCP"))
 head(hcp_ids("HCP_900"))
 }
 }
-

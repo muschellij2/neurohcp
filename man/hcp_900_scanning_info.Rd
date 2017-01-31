@@ -13,4 +13,3 @@ A \code{data.frame} with all the available scanning information
 for the HCP 900 data.
 }
 \keyword{datasets}
-

@@ -21,10 +21,10 @@ bucketlist <- function(
 
   ret = get_hcp_file(
     path_to_file = "",
-                     bucket = "",
-                     access_key = access_key,
-                     secret_key = secret_key,
-                     region = region,
+    bucket = "",
+    access_key = access_key,
+    secret_key = secret_key,
+    region = region,
     ...)
   httr::stop_for_status(ret)
   cr = httr::content(ret, as = "text", encoding = "UTF-8")
