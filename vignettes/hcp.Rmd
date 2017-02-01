@@ -48,11 +48,15 @@ or these can be stored in `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` [environm
 Once these are set, the functions of hcp are ready to use.  To test that the API keys are set correctly, one can run `bucketlist`:
 
 ```{r blist_show, eval = FALSE}
-hcp::bucketlist()
+if (have_aws_key()) {
+  hcp::bucketlist()
+}
 ```
 
 ```{r blist_go, echo = FALSE}
-hcp::bucketlist(verbose = FALSE)
+if (have_aws_key()) {
+  hcp::bucketlist(verbose = FALSE)
+}
 ```
 
 We see that `hcp-openaccess` is a bucket that we have access to, and therefore have access to the data.
@@ -92,7 +96,9 @@ ids_with_dwi = ids_with_dwi %>%
 We can also download a single file using `download_hcp_file`.  Here we will simply download the `bvals` file:
 
 ```{r dl_file}
-ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals")
+if (have_aws_key()) {
+  ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals")
+}
 ```
 
 

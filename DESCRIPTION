@@ -1,8 +1,8 @@
 Package: hcp
 Type: Package
 Title: Human Connectome Project
-Version: 0.4.10
-Date: 2016-10-08
+Version: 0.4.11
+Date: 2017-02-01
 Author: John Muschelli <muschellij2@gmail.com>
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Downloads and reads data from Human Connectome Project 
