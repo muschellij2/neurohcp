@@ -41,7 +41,8 @@ hcp_aws_url <- function(
     secret_key = secret_key,
     lifetime_minutes = lifetime_minutes,
     query = query,
-    verb = verb)
+    verb = verb,
+    sign = sign)
 
   authenticated_url = L$url
   ending = L$path

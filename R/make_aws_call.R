@@ -8,6 +8,7 @@
 #' @param lifetime_minutes Time that connection can be opened
 #' @param query additional query to add to \code{verb} command
 #' @param verb httr VERB to be used
+#' @param sign Should the url be signed?
 #' @return Character of the url to be passed to \code{httr} VERBs
 #' @export
 #'
@@ -28,15 +29,24 @@ make_aws_call <- function(
   secret_key = NULL,
   lifetime_minutes = 5,
   query = NULL,
-  verb = "GET") {
+  verb = "GET",
+  sign = TRUE) {
 
   L = set_aws_api_key(
     access_key = access_key,
     secret_key = secret_key,
-    default_region = region)
+    default_region = region,
+    error = sign)
 
   access_key = L$access_key
   secret_key = L$secret_key
+
+  if (!sign & is.null(access_key)) {
+    access_key = ""
+  }
+  if (!sign & is.null(secret_key)) {
+    secret_key = ""
+  }
   region = L$default_region
 
 
@@ -84,11 +94,6 @@ make_aws_call <- function(
     signature,
     reserved = TRUE)
 
-  # Authorization = paste0(
-  #   "AWS ",
-  #   enc2utf8(access_key),
-  #   ":",
-  #   date_signature)
 
   q = list( "AWSAccessKeyId" = enc2utf8(access_key),
             "Expires" = expiration_time,
