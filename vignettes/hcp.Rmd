@@ -9,10 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-All code for this document is located at [here](https://raw.githubusercontent.com/muschellij2/neuroc/master/hcp/index.R).
+All code for this document is located at [here](https://raw.githubusercontent.com/muschellij2/neuroc/master/neurohcp/index.R).
 
 ```{r setup, include=FALSE}
-library(hcp)
+library(neurohcp)
 library(dplyr)
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = "")
 ```
@@ -26,36 +26,36 @@ The data is available to those that agree to the license.  Users can either pay 
  
 ## Getting an Access/API Key
 
-Once logged into [http://db.humanconnectome.org](http://db.humanconnectome.org) and the terms are accepted, the user must enable Amazon S3 access for their Amazon account.  The user will then be provided an access key identifier (ID), which is required to authenticate a user to Amazon as well as a secret key.  These access and secret keys are necessary for the [hcp package](https://github.com/muschellij2/hcp), and will be referred to as access keys or API (application program interface) keys.
+Once logged into [http://db.humanconnectome.org](http://db.humanconnectome.org) and the terms are accepted, the user must enable Amazon S3 access for their Amazon account.  The user will then be provided an access key identifier (ID), which is required to authenticate a user to Amazon as well as a secret key.  These access and secret keys are necessary for the [neurohcp package](https://github.com/muschellij2/neurohcp), and will be referred to as access keys or API (application program interface) keys.
 
-# Installing the hcp package
+# Installing the neurohcp package
 
-We will install the hcp package using the Neuroconductor installer:
+We will install the neurohcp package using the Neuroconductor installer:
 ```{r, eval = FALSE}
 source("http://neuroconductor.org/neurocLite.R")
-neuro_install("hcp", release = "stable")
+neuro_install("neurohcp", release = "stable")
 ```
 
 ## Setting the API key
 
-In the hcp package, `set_aws_api_key` will set the AWS access keys:
+In the `neurohcp` package, `set_aws_api_key` will set the AWS access keys:
 
 ```{r, eval = FALSE}
 set_aws_api_key(access_key = "ACCESS_KEY", secret_key = "SECRET_KEY")
 ```
 or these can be stored in `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` [environment variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html), respectively.
 
-Once these are set, the functions of hcp are ready to use.  To test that the API keys are set correctly, one can run `bucketlist`:
+Once these are set, the functions of neurohcp are ready to use.  To test that the API keys are set correctly, one can run `bucketlist`:
 
 ```{r blist_show, eval = FALSE}
 if (have_aws_key()) {
-  hcp::bucketlist()
+  neurohcp::bucketlist()
 }
 ```
 
 ```{r blist_go, echo = FALSE}
 if (have_aws_key()) {
-  hcp::bucketlist(verbose = FALSE)
+  neurohcp::bucketlist(verbose = FALSE)
 }
 ```
 
@@ -64,7 +64,7 @@ We see that `hcp-openaccess` is a bucket that we have access to, and therefore h
 
 ## Getting Data: Downloading a Directory of Data
 
-In the hcp package, there is a data set indicating the scans read for each subject, named `hcp_900_scanning_info`.  We can subset those subjects that have diffusion tensor imaging:
+In the neurohcp package, there is a data set indicating the scans read for each subject, named `hcp_900_scanning_info`.  We can subset those subjects that have diffusion tensor imaging:
 
 ```{r, eval = TRUE}
 ids_with_dwi = hcp_900_scanning_info %>% 

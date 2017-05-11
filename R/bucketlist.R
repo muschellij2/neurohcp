@@ -28,8 +28,14 @@ bucketlist <- function(
     ...)
   httr::stop_for_status(ret)
   cr = httr::content(ret, as = "text", encoding = "UTF-8")
+  dtype = ret$headers$`content-type`
 
   if (cr != "") {
+    if (grepl("html", dtype)) {
+      warning(paste0("Response was html from amazon, returning ",
+                     "output rather than parsing"))
+      return(ret)
+    }
     res = read_xml(cr)
     res = as_list(res)
     res = res$Buckets

@@ -1,23 +1,23 @@
 ## ----setup, include=FALSE------------------------------------------------
-library(hcp)
+library(neurohcp)
 library(dplyr)
 knitr::opts_chunk$set(echo = TRUE, cache = FALSE, comment = "")
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  source("http://neuroconductor.org/neurocLite.R")
-#  neuro_install("hcp", release = "stable")
+#  neuro_install("neurohcp", release = "stable")
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  set_aws_api_key(access_key = "ACCESS_KEY", secret_key = "SECRET_KEY")
 
 ## ----blist_show, eval = FALSE--------------------------------------------
 #  if (have_aws_key()) {
-#    hcp::bucketlist()
+#    neurohcp::bucketlist()
 #  }
 
 ## ----blist_go, echo = FALSE----------------------------------------------
 if (have_aws_key()) {
-  hcp::bucketlist(verbose = FALSE)
+  neurohcp::bucketlist(verbose = FALSE)
 }
 
 ## ---- eval = TRUE--------------------------------------------------------

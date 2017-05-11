@@ -1,4 +1,4 @@
-library(hcp)
+library(neurohcp)
 library(plyr)
 library(dplyr)
 library(readr)

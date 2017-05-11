@@ -21,14 +21,14 @@ download_hcp_file = function(path_to_file,
                              ...) {
   if (is.null(destfile)) {
     destfile = file.path(tempdir(),
-                        basename(path_to_file))
+                         basename(path_to_file))
   }
   url <- hcp_aws_url(path_to_file = path_to_file, ...)
   args = list(
     url = url,
     write_disk(path = destfile,
                overwrite = TRUE)
-    )
+  )
   if (verbose) {
     args = c(args, list(progress()))
   }
@@ -38,4 +38,13 @@ download_hcp_file = function(path_to_file,
     stop_for_status(ret)
   }
   return(destfile)
+}
+
+#' @export
+#' @rdname download_hcp_file
+download_fcp_file = function(
+  ...) {
+  download_hcp_file(...,
+                    bucket = "fcp-indi",
+                    sign = FALSE)
 }

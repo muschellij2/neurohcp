@@ -3,11 +3,17 @@
 \name{get_hcp_file}
 \alias{get_hcp_file}
 \alias{head_hcp_file}
+\alias{get_fcp_file}
+\alias{head_fcp_file}
 \title{Get HCP file}
 \usage{
 get_hcp_file(..., verbose = TRUE, verb = "GET")
 
 head_hcp_file(...)
+
+get_fcp_file(...)
+
+head_fcp_file(...)
 }
 \arguments{
 \item{...}{arguments to pass to \code{\link{make_aws_call}}}

@@ -2,10 +2,13 @@
 % Please edit documentation in R/download_hcp_file.R
 \name{download_hcp_file}
 \alias{download_hcp_file}
+\alias{download_fcp_file}
 \title{Download HCP file}
 \usage{
 download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE,
   error = TRUE, ...)
+
+download_fcp_file(...)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}

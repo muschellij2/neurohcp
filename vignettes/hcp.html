@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="John Muschelli" />
 
-<meta name="date" content="2017-02-01" />
+<meta name="date" content="2017-05-11" />
 
 <title>Getting Data from the Human Connectome Project (HCP)</title>
 
@@ -70,11 +70,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Getting Data from the Human Connectome Project (HCP)</h1>
 <h4 class="author"><em>John Muschelli</em></h4>
-<h4 class="date"><em>2017-02-01</em></h4>
+<h4 class="date"><em>2017-05-11</em></h4>
 
 
 
-<p>All code for this document is located at <a href="https://raw.githubusercontent.com/muschellij2/neuroc/master/hcp/index.R">here</a>.</p>
+<p>All code for this document is located at <a href="https://raw.githubusercontent.com/muschellij2/neuroc/master/neurohcp/index.R">here</a>.</p>
 <div id="human-connectome-project-hcp" class="section level1">
 <h1>Human Connectome Project (HCP)</h1>
 <p>The <a href="https://www.humanconnectome.org/">Human Connectome Project</a> (HCP) is a consortium of sites whose goal is to map “human brain circuitry in a target number of 1200 healthy adults using cutting-edge methods of noninvasive neuroimaging” (<a href="https://www.humanconnectome.org/" class="uri">https://www.humanconnectome.org/</a>). It includes a large cohort of individuals with a vast amount of neuroimaging data ranging from structural magnetic resonance imaging (MRI), functional MRI – both during tasks and resting-state– and diffusion tensor imaging (DTI), from multiple sites.</p>
@@ -84,34 +84,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The data is available to those that agree to the license. Users can either pay to get hard drives of the data sent to them, named “Connectome In A Box”, or access the data online. The data can be obtained through the database at <a href="http://db.humanconnectome.org" class="uri">http://db.humanconnectome.org</a>. Data can be downloaded from the website directly in a browser or through an Amazon Simple Storage Solution (S3) bucket. We will focus on accessing the data from S3.</p>
 <div id="getting-an-accessapi-key" class="section level2">
 <h2>Getting an Access/API Key</h2>
-<p>Once logged into <a href="http://db.humanconnectome.org" class="uri">http://db.humanconnectome.org</a> and the terms are accepted, the user must enable Amazon S3 access for their Amazon account. The user will then be provided an access key identifier (ID), which is required to authenticate a user to Amazon as well as a secret key. These access and secret keys are necessary for the <a href="https://github.com/muschellij2/hcp">hcp package</a>, and will be referred to as access keys or API (application program interface) keys.</p>
+<p>Once logged into <a href="http://db.humanconnectome.org" class="uri">http://db.humanconnectome.org</a> and the terms are accepted, the user must enable Amazon S3 access for their Amazon account. The user will then be provided an access key identifier (ID), which is required to authenticate a user to Amazon as well as a secret key. These access and secret keys are necessary for the <a href="https://github.com/muschellij2/neurohcp">neurohcp package</a>, and will be referred to as access keys or API (application program interface) keys.</p>
 </div>
 </div>
-<div id="installing-the-hcp-package" class="section level1">
-<h1>Installing the hcp package</h1>
-<p>We will install the hcp package using the Neuroconductor installer:</p>
+<div id="installing-the-neurohcp-package" class="section level1">
+<h1>Installing the neurohcp package</h1>
+<p>We will install the neurohcp package using the Neuroconductor installer:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;http://neuroconductor.org/neurocLite.R&quot;</span>)
-<span class="kw">neuro_install</span>(<span class="st">&quot;hcp&quot;</span>, <span class="dt">release =</span> <span class="st">&quot;stable&quot;</span>)</code></pre></div>
+<span class="kw">neuro_install</span>(<span class="st">&quot;neurohcp&quot;</span>, <span class="dt">release =</span> <span class="st">&quot;stable&quot;</span>)</code></pre></div>
 <div id="setting-the-api-key" class="section level2">
 <h2>Setting the API key</h2>
-<p>In the hcp package, <code>set_aws_api_key</code> will set the AWS access keys:</p>
+<p>In the <code>neurohcp</code> package, <code>set_aws_api_key</code> will set the AWS access keys:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set_aws_api_key</span>(<span class="dt">access_key =</span> <span class="st">&quot;ACCESS_KEY&quot;</span>, <span class="dt">secret_key =</span> <span class="st">&quot;SECRET_KEY&quot;</span>)</code></pre></div>
 <p>or these can be stored in <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code> <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html">environment variables</a>, respectively.</p>
-<p>Once these are set, the functions of hcp are ready to use. To test that the API keys are set correctly, one can run <code>bucketlist</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">have_aws_key</span>()) {
-  hcp::<span class="kw">bucketlist</span>()
+<p>Once these are set, the functions of neurohcp are ready to use. To test that the API keys are set correctly, one can run <code>bucketlist</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_aws_key</span>()) {
+  neurohcp<span class="op">::</span><span class="kw">bucketlist</span>()
 }</code></pre></div>
 <p>We see that <code>hcp-openaccess</code> is a bucket that we have access to, and therefore have access to the data.</p>
 </div>
 <div id="getting-data-downloading-a-directory-of-data" class="section level2">
 <h2>Getting Data: Downloading a Directory of Data</h2>
-<p>In the hcp package, there is a data set indicating the scans read for each subject, named <code>hcp_900_scanning_info</code>. We can subset those subjects that have diffusion tensor imaging:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ids_with_dwi =<span class="st"> </span>hcp_900_scanning_info %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(scan_type %in%<span class="st"> &quot;dMRI&quot;</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(id) %&gt;%<span class="st"> </span>
+<p>In the neurohcp package, there is a data set indicating the scans read for each subject, named <code>hcp_900_scanning_info</code>. We can subset those subjects that have diffusion tensor imaging:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ids_with_dwi =<span class="st"> </span>hcp_900_scanning_info <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(scan_type <span class="op">%in%</span><span class="st"> &quot;dMRI&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(id) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>unique
 <span class="kw">head</span>(ids_with_dwi)</code></pre></div>
-<pre><code># A tibble: 6 × 1
+<pre><code># A tibble: 6 x 1
       id
    &lt;chr&gt;
 1 100307
@@ -122,19 +122,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 6 101410</code></pre>
 <p>Let us download the complete directory of diffusion data using <code>download_hcp_dir</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r =<span class="st"> </span><span class="kw">download_hcp_dir</span>(<span class="st">&quot;HCP/100307/T1w/Diffusion&quot;</span>)
-<span class="kw">print</span>(<span class="kw">basename</span>(r$output_files))</code></pre></div>
+<span class="kw">print</span>(<span class="kw">basename</span>(r<span class="op">$</span>output_files))</code></pre></div>
 <pre><code>[1] &quot;bvals&quot;                   &quot;bvecs&quot;                  
 [3] &quot;data.nii.gz&quot;             &quot;grad_dev.nii.gz&quot;        
 [5] &quot;nodif_brain_mask.nii.gz&quot;</code></pre>
 <p>This diffusion data is the data that can be used to create summaries such as fractional anisotropy and mean diffusivity.</p>
 <p>If we create a new column with all the directories, we can iterate over these to download all the diffusion data for these subjects from the HCP database.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ids_with_dwi =<span class="st"> </span>ids_with_dwi %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ids_with_dwi =<span class="st"> </span>ids_with_dwi <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id_dir =</span> <span class="kw">paste0</span>(<span class="st">&quot;HCP/&quot;</span>, id, <span class="st">&quot;/T1w/Diffusion&quot;</span>))</code></pre></div>
 </div>
 <div id="getting-data-downloading-a-single-file" class="section level2">
 <h2>Getting Data: Downloading a Single File</h2>
 <p>We can also download a single file using <code>download_hcp_file</code>. Here we will simply download the <code>bvals</code> file:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">have_aws_key</span>()) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_aws_key</span>()) {
   ret =<span class="st"> </span><span class="kw">download_hcp_file</span>(<span class="st">&quot;HCP/100307/T1w/Diffusion/bvals&quot;</span>)
 }</code></pre></div>
 </div>
@@ -147,7 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

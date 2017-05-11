@@ -63,3 +63,12 @@ download_hcp_dir = function(
   return(L)
 
 }
+
+#' @export
+#' @rdname download_hcp_dir
+download_fcp_dir = function(
+  ...) {
+  download_hcp_dir(...,
+                    bucket = "fcp-indi",
+                    sign = FALSE)
+}

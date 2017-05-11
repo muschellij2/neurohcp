@@ -34,3 +34,20 @@ head_hcp_file = function(...) {
   get_hcp_file(..., verb = "HEAD")
 }
 
+
+#' @rdname get_hcp_file
+#' @export
+get_fcp_file = function(...) {
+  get_hcp_file(...,
+               bucket = "fcp-indi",
+               sign = FALSE)
+}
+
+#' @rdname get_hcp_file
+#' @export
+head_fcp_file = function(...) {
+  head_hcp_file(...,
+               bucket = "fcp-indi",
+               sign = FALSE)
+}
+
