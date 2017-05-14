@@ -12,7 +12,7 @@
 
 <meta name="author" content="John Muschelli" />
 
-<meta name="date" content="2017-05-11" />
+<meta name="date" content="2017-05-14" />
 
 <title>Getting Data from the Human Connectome Project (HCP)</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Getting Data from the Human Connectome Project (HCP)</h1>
 <h4 class="author"><em>John Muschelli</em></h4>
-<h4 class="date"><em>2017-05-11</em></h4>
+<h4 class="date"><em>2017-05-14</em></h4>
 
 
 
@@ -96,7 +96,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Setting the API key</h2>
 <p>In the <code>neurohcp</code> package, <code>set_aws_api_key</code> will set the AWS access keys:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set_aws_api_key</span>(<span class="dt">access_key =</span> <span class="st">&quot;ACCESS_KEY&quot;</span>, <span class="dt">secret_key =</span> <span class="st">&quot;SECRET_KEY&quot;</span>)</code></pre></div>
-<p>or these can be stored in <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code> <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html">environment variables</a>, respectively.</p>
+<p>or these can be stored in <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code> environment variables, respectively.</p>
 <p>Once these are set, the functions of neurohcp are ready to use. To test that the API keys are set correctly, one can run <code>bucketlist</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_aws_key</span>()) {
   neurohcp<span class="op">::</span><span class="kw">bucketlist</span>()

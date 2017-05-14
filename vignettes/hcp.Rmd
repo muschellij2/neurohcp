@@ -43,7 +43,7 @@ In the `neurohcp` package, `set_aws_api_key` will set the AWS access keys:
 ```{r, eval = FALSE}
 set_aws_api_key(access_key = "ACCESS_KEY", secret_key = "SECRET_KEY")
 ```
-or these can be stored in `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` [environment variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/EnvVar.html), respectively.
+or these can be stored in `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables, respectively.
 
 Once these are set, the functions of neurohcp are ready to use.  To test that the API keys are set correctly, one can run `bucketlist`:
 

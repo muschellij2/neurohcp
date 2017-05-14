@@ -6,7 +6,7 @@ Date: 2017-05-11
 Author: John Muschelli <muschellij2@gmail.com>
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Downloads and reads data from Human 'Connectome' Project 
-    <https://db.humanconnectome.org> using Amazon Web Services (AWS) 
+    <https://db.humanconnectome.org> using Amazon Web Services ('AWS') 
     'S3' buckets.
 License: GPL-2 
 LazyData: true
