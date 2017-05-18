@@ -20,7 +20,8 @@ Imports:
 Suggests:
     dplyr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 RoxygenNote: 6.0.1
 URL: https://db.humanconnectome.org
 BugReports: https://github.com/muschellij2/neurohcp/issues
