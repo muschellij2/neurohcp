@@ -28,7 +28,7 @@ ids_with_dwi = hcp_900_scanning_info %>%
 head(ids_with_dwi)
 
 ## ---- eval = FALSE, echo = TRUE------------------------------------------
-#  r = download_hcp_dir("HCP/100307/T1w/Diffusion")
+#  r = download_hcp_dir("HCP/100307/T1w/Diffusion", verbose = FALSE)
 #  print(basename(r$output_files))
 
 ## ---- eval = TRUE, echo = FALSE------------------------------------------
@@ -42,6 +42,6 @@ r$output_files
 
 ## ----dl_file-------------------------------------------------------------
 if (have_aws_key()) {
-  ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals")
+  ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals", verbose = FALSE)
 }
 

@@ -14,7 +14,7 @@
 #' @examples
 #' if (have_aws_key()) {
 #'    prefix = "HCP/100307/release-notes"
-#'    res = download_hcp_dir(prefix = prefix)
+#'    res = download_hcp_dir(prefix = prefix, verbose = FALSE)
 #' }
 download_hcp_dir = function(
   prefix,
@@ -24,6 +24,7 @@ download_hcp_dir = function(
   ...) {
   ret = hcp_list_files(prefix = prefix,
                        delimiter = delimiter,
+                       verbose = verbose,
                        ...)
 
   res = parse_list_files(ret)

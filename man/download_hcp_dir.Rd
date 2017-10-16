@@ -32,6 +32,6 @@ Downloads a directory/folder from HCP database
 \examples{
 if (have_aws_key()) {
    prefix = "HCP/100307/release-notes"
-   res = download_hcp_dir(prefix = prefix)
+   res = download_hcp_dir(prefix = prefix, verbose = FALSE)
 }
 }

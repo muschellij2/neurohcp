@@ -76,7 +76,7 @@ head(ids_with_dwi)
 
 Let us download the complete directory of diffusion data using `download_hcp_dir`:
 ```{r, eval = FALSE, echo = TRUE}
-r = download_hcp_dir("HCP/100307/T1w/Diffusion")
+r = download_hcp_dir("HCP/100307/T1w/Diffusion", verbose = FALSE)
 print(basename(r$output_files))
 ```
 ```{r, eval = TRUE, echo = FALSE}
@@ -97,7 +97,7 @@ We can also download a single file using `download_hcp_file`.  Here we will simp
 
 ```{r dl_file}
 if (have_aws_key()) {
-  ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals")
+  ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals", verbose = FALSE)
 }
 ```
 

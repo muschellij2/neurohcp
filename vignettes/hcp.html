@@ -12,7 +12,7 @@
 
 <meta name="author" content="John Muschelli" />
 
-<meta name="date" content="2017-05-14" />
+<meta name="date" content="2017-10-16" />
 
 <title>Getting Data from the Human Connectome Project (HCP)</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Getting Data from the Human Connectome Project (HCP)</h1>
 <h4 class="author"><em>John Muschelli</em></h4>
-<h4 class="date"><em>2017-05-14</em></h4>
+<h4 class="date"><em>2017-10-16</em></h4>
 
 
 
@@ -101,6 +101,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_aws_key</span>()) {
   neurohcp<span class="op">::</span><span class="kw">bucketlist</span>()
 }</code></pre></div>
+<pre><code>                                 Name             CreationDate
+1 cf-templates-tgdhg13zvsxm-us-west-2 2017-04-05T20:37:43.000Z
+2                      hcp-openaccess 2014-05-15T18:56:50.000Z
+3                 hcp-openaccess-logs 2014-05-15T18:57:07.000Z
+4                hcp-openaccess-trail 2016-06-02T20:22:11.000Z</code></pre>
 <p>We see that <code>hcp-openaccess</code> is a bucket that we have access to, and therefore have access to the data.</p>
 </div>
 <div id="getting-data-downloading-a-directory-of-data" class="section level2">
@@ -121,7 +126,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 5 101309
 6 101410</code></pre>
 <p>Let us download the complete directory of diffusion data using <code>download_hcp_dir</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r =<span class="st"> </span><span class="kw">download_hcp_dir</span>(<span class="st">&quot;HCP/100307/T1w/Diffusion&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r =<span class="st"> </span><span class="kw">download_hcp_dir</span>(<span class="st">&quot;HCP/100307/T1w/Diffusion&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
 <span class="kw">print</span>(<span class="kw">basename</span>(r<span class="op">$</span>output_files))</code></pre></div>
 <pre><code>[1] &quot;bvals&quot;                   &quot;bvecs&quot;                  
 [3] &quot;data.nii.gz&quot;             &quot;grad_dev.nii.gz&quot;        
@@ -135,7 +140,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Getting Data: Downloading a Single File</h2>
 <p>We can also download a single file using <code>download_hcp_file</code>. Here we will simply download the <code>bvals</code> file:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_aws_key</span>()) {
-  ret =<span class="st"> </span><span class="kw">download_hcp_file</span>(<span class="st">&quot;HCP/100307/T1w/Diffusion/bvals&quot;</span>)
+  ret =<span class="st"> </span><span class="kw">download_hcp_file</span>(<span class="st">&quot;HCP/100307/T1w/Diffusion/bvals&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
 }</code></pre></div>
 </div>
 </div>
