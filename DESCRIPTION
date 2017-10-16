@@ -22,7 +22,8 @@ Suggests:
     knitr,
     rmarkdown,
     covr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 URL: https://db.humanconnectome.org
 BugReports: https://github.com/muschellij2/neurohcp/issues
 VignetteBuilder: knitr
+Encoding: UTF-8
