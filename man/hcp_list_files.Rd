@@ -52,11 +52,13 @@ if (have_aws_key()){
  all_dirs = hcp_list_dirs("HCP/")
  cr =parse_list_files(all_dirs)$prefixes
 }
+\dontrun{
 res = fcp_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
 projects = unname(projects)
 head(projects)
 head(basename(projects))
+}
 res = openneuro_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
 projects = unname(projects)

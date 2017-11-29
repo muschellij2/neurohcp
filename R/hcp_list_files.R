@@ -108,11 +108,13 @@ hcp_list_dirs = function(
 #' @export
 #' @rdname hcp_list_files
 #' @examples
+#' \dontrun{
 #' res = fcp_list_dirs()
 #' projects = unlist(parse_list_files(res)$prefixes)
 #' projects = unname(projects)
 #' head(projects)
 #' head(basename(projects))
+#' }
 fcp_list_dirs = function(
   prefix = "data/Projects/",
   ...
