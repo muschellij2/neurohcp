@@ -48,3 +48,12 @@ download_fcp_file = function(
                     bucket = "fcp-indi",
                     sign = FALSE)
 }
+
+#' @export
+#' @rdname download_hcp_file
+download_openneuro_file = function(
+  ...) {
+  download_hcp_file(...,
+                    bucket = "openneuro",
+                    sign = FALSE)
+}

@@ -51,3 +51,21 @@ head_fcp_file = function(...) {
                sign = FALSE)
 }
 
+
+
+#' @rdname get_hcp_file
+#' @export
+get_openneuro_file = function(...) {
+  get_hcp_file(...,
+               bucket = "openneuro",
+               sign = FALSE)
+}
+
+#' @rdname get_hcp_file
+#' @export
+head_openneuro_file = function(...) {
+  head_hcp_file(...,
+                bucket = "openneuro",
+                sign = FALSE)
+}
+

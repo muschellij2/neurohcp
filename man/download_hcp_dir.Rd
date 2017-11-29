@@ -3,12 +3,15 @@
 \name{download_hcp_dir}
 \alias{download_hcp_dir}
 \alias{download_fcp_dir}
+\alias{download_openneuro_dir}
 \title{Download an entire directory from HCP}
 \usage{
 download_hcp_dir(prefix, delimiter = "", outdir = tempfile(),
   verbose = TRUE, ...)
 
 download_fcp_dir(...)
+
+download_openneuro_dir(...)
 }
 \arguments{
 \item{prefix}{Folder to downlaod}

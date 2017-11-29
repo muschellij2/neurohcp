@@ -1,8 +1,8 @@
 Package: neurohcp
 Type: Package
 Title: Human Connectome Project Interface
-Version: 0.7.0
-Date: 2017-05-11
+Version: 0.7.2
+Date: 2017-11-29
 Author: John Muschelli <muschellij2@gmail.com>
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Downloads and reads data from Human 'Connectome' Project 

@@ -3,12 +3,15 @@
 \name{download_hcp_file}
 \alias{download_hcp_file}
 \alias{download_fcp_file}
+\alias{download_openneuro_file}
 \title{Download HCP file}
 \usage{
 download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE,
   error = TRUE, ...)
 
 download_fcp_file(...)
+
+download_openneuro_file(...)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}

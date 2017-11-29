@@ -28,7 +28,8 @@ hcp_list_files = function(
   ...
 ) {
 
-  q = list(prefix = prefix)
+  q = list()
+  q$prefix = prefix
   q$delimiter = delimiter
   query = c(q, query)
   ret = get_hcp_file(
@@ -50,6 +51,39 @@ hcp_list_files = function(
   return(L)
 }
 
+#' @export
+#' @rdname hcp_list_files
+fcp_list_files = function(
+  prefix = "",
+  delimiter = NULL,
+  query = NULL,
+  ...
+) {
+  hcp_list_files(
+    prefix = prefix,
+    delimiter = delimiter,
+    query = query,
+    bucket = "openneuro",
+    sign = FALSE,
+    ...)
+}
+
+#' @export
+#' @rdname hcp_list_files
+openneuro_list_files = function(
+  prefix = "",
+  delimiter = NULL,
+  query = NULL,
+  ...
+) {
+  hcp_list_files(
+    prefix = prefix,
+    delimiter = delimiter,
+    query = query,
+    bucket = "fcp-indi",
+    sign = FALSE,
+    ...)
+}
 
 #' @rdname hcp_list_files
 #' @export
@@ -62,10 +96,52 @@ hcp_list_dirs = function(
   prefix = "HCP/",
   ...
 ) {
-  if (!grepl("/$", prefix)) {
-    prefix = paste0(prefix, "/")
+  if (length(prefix) > 0) {
+    if (!grepl("/$", prefix)) {
+      prefix = paste0(prefix, "/")
+    }
   }
   return(hcp_list_files(..., prefix = prefix, delimiter = "/"))
 }
 
+
+#' @export
+#' @rdname hcp_list_files
+#' @examples
+#' res = fcp_list_dirs()
+#' projects = unlist(parse_list_files(res)$prefixes)
+#' projects = unname(projects)
+#' head(projects)
+#' head(basename(projects))
+fcp_list_dirs = function(
+  prefix = "data/Projects/",
+  ...
+) {
+  hcp_list_dirs(
+    prefix = prefix,
+    bucket = "fcp-indi",
+    sign = FALSE,
+    ...)
+}
+
+
+
+#' @rdname hcp_list_files
+#' @export
+#' @examples
+#' res = openneuro_list_dirs()
+#' projects = unlist(parse_list_files(res)$prefixes)
+#' projects = unname(projects)
+#' head(projects)
+#' head(basename(projects))
+openneuro_list_dirs  = function(
+  prefix = NULL,
+  ...
+) {
+  hcp_list_dirs(
+    prefix = prefix,
+    bucket = "openneuro",
+    sign = FALSE,
+    ...)
+}
 
