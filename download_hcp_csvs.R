@@ -5,7 +5,8 @@ library(readr)
 
 
 # group = "HCP_900"
-group = "HCP"
+group = "HCP_1200"
+# group = "HCP"
 ids = hcp_ids(group = group)
 all_csvs =  paste0(group, "/", ids, "/unprocessed/3T/", ids, "_3T.csv")
 destfile = file.path("data", paste0(group, "_csvs"),

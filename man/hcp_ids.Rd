@@ -4,7 +4,7 @@
 \alias{hcp_ids}
 \title{Get list of HCP Ids}
 \usage{
-hcp_ids(group = c("HCP", "HCP_900"))
+hcp_ids(group = c("HCP", "HCP_900", "HCP_1200"))
 }
 \arguments{
 \item{group}{Group of IDs to return}
