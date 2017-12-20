@@ -5,4 +5,5 @@
 
 data/HCP_csvs/*
 data/HCP_900_csvs/*
+data/HCP_1200_csvs/*
 inst/doc
