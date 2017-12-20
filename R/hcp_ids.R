@@ -10,7 +10,7 @@
 #' head(hcp_ids("HCP"))
 #' head(hcp_ids("HCP_900"))
 #' }
-hcp_ids = function(group = c("HCP", "HCP_900", "HCP_1200")) {
+hcp_ids = function(group = c("HCP", "HCP_900", "HCP_1200", "HCP_Retest")) {
   group = match.arg(group)
 
   prefix = paste0(group, "/")

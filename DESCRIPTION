@@ -1,7 +1,7 @@
 Package: neurohcp
 Type: Package
 Title: Human Connectome Project Interface
-Version: 0.7.2
+Version: 0.7.3
 Date: 2017-11-29
 Author: John Muschelli <muschellij2@gmail.com>
 Maintainer: John Muschelli <muschellij2@gmail.com>
@@ -11,6 +11,8 @@ Description: Downloads and reads data from Human 'Connectome' Project
 License: GPL-2 
 LazyData: true
 LazyLoad: true
+Depends:
+    R (>= 2.10)
 Imports:
     digest,
     httr,

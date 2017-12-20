@@ -6,4 +6,5 @@
 data/HCP_csvs/*
 data/HCP_900_csvs/*
 data/HCP_1200_csvs/*
+data/HCP_Retest_csvs/*
 inst/doc

@@ -11,3 +11,10 @@
 #' for the HCP 900 data.
 #'
 "hcp_900_scanning_info"
+
+#' @title Scanning Information for HCP 1200 Data
+#'
+#' @description A \code{data.frame} with all the available scanning information
+#' for the HCP 1200 data.
+#'
+"hcp_1200_scanning_info"
