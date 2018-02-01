@@ -14,7 +14,7 @@ download_fcp_dir(...)
 download_openneuro_dir(...)
 }
 \arguments{
-\item{prefix}{Folder to downlaod}
+\item{prefix}{Folder to download}
 
 \item{delimiter}{Delimiter for files}
 

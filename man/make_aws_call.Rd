@@ -31,7 +31,7 @@ make_aws_call(path_to_file = "/", bucket = "hcp-openaccess",
 Character of the url to be passed to \code{httr} VERBs
 }
 \description{
-Constructs GET infromation string for AWS S3 Bucket
+Constructs GET information string for AWS S3 Bucket
 }
 \examples{
 \dontrun{

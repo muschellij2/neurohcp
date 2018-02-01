@@ -20,7 +20,7 @@ have_aws_key()
 \item{default_region}{Amazon default region.  If \code{NULL} then looks at the
 \code{AWS_DEFAULT_REGION} system variable.}
 
-\item{error}{Should this function error if things are not specifed?}
+\item{error}{Should this function error if things are not specified?}
 }
 \value{
 List of \code{access_key}, \code{secret_key},

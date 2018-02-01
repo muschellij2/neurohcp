@@ -7,7 +7,7 @@
 #' \code{AWS_SECRET_ACCESS_KEY} system variable.
 #' @param default_region Amazon default region.  If \code{NULL} then looks at the
 #' \code{AWS_DEFAULT_REGION} system variable.
-#' @param error Should this function error if things are not specifed?
+#' @param error Should this function error if things are not specified?
 #'
 #' @return List of \code{access_key}, \code{secret_key},
 #' and \code{default_region}

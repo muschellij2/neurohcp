@@ -1,5 +1,5 @@
 #' @title Construct AWS S3 Call
-#' @description Constructs GET infromation string for AWS S3 Bucket
+#' @description Constructs GET information string for AWS S3 Bucket
 #' @param path_to_file Path to file on HCP S3 Bucket
 #' @param bucket Bucket to download from
 #' @param region Region of S3 Bucket
