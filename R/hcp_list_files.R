@@ -135,7 +135,9 @@ fcp_list_dirs = function(
 #' projects = unlist(parse_list_files(res)$prefixes)
 #' projects = unname(projects)
 #' head(projects)
+#' if (length(projects) > 0) {
 #' head(basename(projects))
+#' }
 openneuro_list_dirs  = function(
   prefix = NULL,
   ...

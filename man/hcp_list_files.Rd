@@ -63,5 +63,7 @@ res = openneuro_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
 projects = unname(projects)
 head(projects)
+if (length(projects) > 0) {
 head(basename(projects))
+}
 }
