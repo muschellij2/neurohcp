@@ -7,3 +7,4 @@ data/HCP_900_csvs/*
 data/HCP_1200_csvs/*
 ^\.travis\.yml$
 ^appveyor\.yml$
+^cran-comments\.md$

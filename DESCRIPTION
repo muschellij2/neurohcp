@@ -2,9 +2,15 @@ Package: neurohcp
 Type: Package
 Title: Human Connectome Project Interface
 Version: 0.7.3
-Date: 2017-11-29
-Author: John Muschelli <muschellij2@gmail.com>
-Maintainer: John Muschelli <muschellij2@gmail.com>
+Date: 2018-02-01
+Authors@R: c(person(given = "John",
+           family = "Muschelli",
+           email = "muschellij2@gmail.com",
+           role = c("aut", "cre")),
+           person(given = "Adi",
+           family = "Gherman",
+           email = "adrian.gherman@gmail.com",
+           role = c("ctb")))
 Description: Downloads and reads data from Human 'Connectome' Project 
     <https://db.humanconnectome.org> using Amazon Web Services ('AWS') 
     'S3' buckets.
