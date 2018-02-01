@@ -23,7 +23,7 @@ Imports:
     digest,
     httr,
     utils,
-    xml2 (>= 1.0.0.9001),
+    xml2 (>= 1.0.1),
     base64enc
 Suggests:
     dplyr,
