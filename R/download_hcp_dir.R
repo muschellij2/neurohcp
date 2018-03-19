@@ -30,6 +30,10 @@ download_hcp_dir = function(
   res = parse_list_files(ret)
   res = res$contents
   pref = ret$parsed_result$Prefix[[1]]
+  if ("ListBucketResult" %in%  names(ret$parsed_result)
+      && is.null(pref)) {
+    pref = ret$parsed_result$ListBucketResult$Prefix[[1]]
+  }
   res$sub_dir = sub(pref, "", res$Key, fixed = TRUE)
   res$destfile = file.path(outdir, res$sub_dir)
 
