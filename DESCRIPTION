@@ -1,8 +1,8 @@
 Package: neurohcp
 Type: Package
 Title: Human 'Connectome' Project Interface
-Version: 0.7.4
-Date: 2018-02-01
+Version: 0.8.0
+Date: 2018-04-10
 Authors@R: c(person(given = "John",
            family = "Muschelli",
            email = "muschellij2@gmail.com",

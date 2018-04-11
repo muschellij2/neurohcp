@@ -38,6 +38,9 @@ bucketlist <- function(
     }
     res = read_xml(cr)
     res = as_list(res)
+    if ("ListAllMyBucketsResult" %in% names(res)) {
+      res = res$ListAllMyBucketsResult
+    }
     res = res$Buckets
     res = t(sapply(res, unlist))
     rownames(res) = NULL
