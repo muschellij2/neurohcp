@@ -4,9 +4,9 @@
 #' @param ret object with element \code{parsed_result}, usually from
 #' \code{\link{hcp_list_files}}
 #'
-#' @return List of 2 data.frames, the contents and the `commonprefixes`
-#' elements
-#' from the list
+#' @return List of 2 data.frames, the contents and the
+#' \code{commonprefixes}
+#' elements from the list
 #' @export
 #'
 #' @examples

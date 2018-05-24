@@ -11,9 +11,9 @@ parse_list_files(ret)
 \code{\link{hcp_list_files}}}
 }
 \value{
-List of 2 data.frames, the contents and the `commonprefixes`
-elements
-from the list
+List of 2 data.frames, the contents and the
+\code{commonprefixes}
+elements from the list
 }
 \description{
 This parses the result from \code{\link{hcp_list_files}} and
