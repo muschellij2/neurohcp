@@ -28,7 +28,7 @@ make_aws_call(path_to_file = "/", bucket = "hcp-openaccess",
 \item{sign}{Should the url be signed?}
 }
 \value{
-Character of the url to be passed to \code{httr} VERBs
+Character of the url to be passed to \code{httr} `VERB`s
 }
 \description{
 Constructs GET information string for AWS S3 Bucket

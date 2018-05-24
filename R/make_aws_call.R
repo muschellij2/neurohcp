@@ -9,7 +9,7 @@
 #' @param query additional query to add to \code{verb} command
 #' @param verb httr VERB to be used
 #' @param sign Should the url be signed?
-#' @return Character of the url to be passed to \code{httr} VERBs
+#' @return Character of the url to be passed to \code{httr} `VERB`s
 #' @export
 #'
 #' @examples \dontrun{
