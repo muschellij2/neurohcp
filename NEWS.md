@@ -1,5 +1,9 @@
 # neurohcp 0.8.0
 
+* Fixed even more problems with endpoints.  
+
+# neurohcp 0.8.0
+
 * Fixed some of the problems with the new API endpoints.  This may be a bigger problem in the future (fixes #1). 
 
 * Fixed `bucketlist()` with new API endpoint.
