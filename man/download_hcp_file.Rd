@@ -6,8 +6,13 @@
 \alias{download_openneuro_file}
 \title{Download HCP file}
 \usage{
-download_hcp_file(path_to_file, destfile = NULL, verbose = TRUE,
-  error = TRUE, ...)
+download_hcp_file(
+  path_to_file,
+  destfile = NULL,
+  verbose = TRUE,
+  error = TRUE,
+  ...
+)
 
 download_fcp_file(...)
 

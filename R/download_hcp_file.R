@@ -23,19 +23,29 @@ download_hcp_file = function(path_to_file,
     destfile = file.path(tempdir(),
                          basename(path_to_file))
   }
-  url <- hcp_aws_url(path_to_file = path_to_file, ...)
-  args = list(
-    url = url,
-    write_disk(path = destfile,
-               overwrite = TRUE)
-  )
-  if (verbose) {
-    args = c(args, list(progress()))
-  }
-  ret <- do.call("GET", args)
+  L = make_aws_call(path_to_file = path_to_file, ...)
+
+  # url <- hcp_aws_url(path_to_file = path_to_file, ...)
+  bucket = list(...)$bucket
+  if (is.null(bucket)) bucket = formals(hcp_aws_url)$bucket
+  query = L$query
+  query$AWSAccessKeyId = NULL
+  query$Expires = NULL
+  query$Signature = NULL
+  ret = aws.s3::s3HTTP(
+    bucket = bucket,
+    path = path_to_file,
+    verb = "GET",
+    key = L$headers$access_key,
+    secret = L$headers$secret_key,
+    show_progress = verbose,
+    region = L$headers$default_region,
+    write_disk = httr::write_disk(
+      path = destfile,
+      overwrite = TRUE))
 
   if (error) {
-    stop_for_status(ret)
+    httr::stop_for_status(ret)
   }
   return(destfile)
 }

@@ -4,9 +4,17 @@
 \alias{hcp_aws_url}
 \title{Construct AWS S3 String}
 \usage{
-hcp_aws_url(path_to_file = "", bucket = "hcp-openaccess",
-  region = "us-east-1", access_key = NULL, secret_key = NULL,
-  lifetime_minutes = 20, query = NULL, verb = "GET", sign = TRUE)
+hcp_aws_url(
+  path_to_file = "",
+  bucket = "hcp-openaccess",
+  region = "us-east-1",
+  access_key = NULL,
+  secret_key = NULL,
+  lifetime_minutes = 20,
+  query = NULL,
+  verb = "GET",
+  sign = TRUE
+)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}
@@ -35,7 +43,7 @@ Constructs url string for AWS S3 Bucket to pass in for HCP
 downloading
 }
 \examples{
-\dontrun{
+if (have_aws_key()){
 path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
 hcp_aws_url(path_to_file)
 }

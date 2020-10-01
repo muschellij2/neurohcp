@@ -4,8 +4,7 @@
 \alias{bucketlist}
 \title{Retrieve S3 Bucket List}
 \usage{
-bucketlist(region = "us-east-1", access_key = NULL, secret_key = NULL,
-  ...)
+bucketlist(region = "us-east-1", access_key = NULL, secret_key = NULL, ...)
 }
 \arguments{
 \item{region}{Region of S3 Bucket}
@@ -14,7 +13,7 @@ bucketlist(region = "us-east-1", access_key = NULL, secret_key = NULL,
 
 \item{secret_key}{Amazon S3 Secret Key}
 
-\item{...}{arguments to pass to \code{\link{get_hcp_file}}}
+\item{...}{arguments to pass to \code{\link{bucket_list_df}}}
 }
 \value{
 List of Buckets
@@ -23,7 +22,7 @@ List of Buckets
 Lists the Buckets available with the Key/Secrete
 }
 \examples{
-\dontrun{
+if (have_aws_key()){
 bucketlist()
 }
 }

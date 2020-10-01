@@ -12,7 +12,8 @@
 #' @return Character of the url to be passed to \code{httr} `VERB`s
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples
+#' if (have_aws_key()){
 #' path_to_file <- paste0(
 #'    "HCP_900/100206/MNINonLinear/",
 #'    "100206.164k_fs_LR.wb.spec")
@@ -52,10 +53,13 @@ make_aws_call <- function(
 
   expiration_time <- as.integer(Sys.time() + lifetime_minutes * 60)
 
-  ending = paste0(bucket, "/", path_to_file)
+  # ending = paste0(bucket, "/", path_to_file)
+  ending = path_to_file
   ending = sub("//$", "/", ending)
-  if (ending == "/") {
-    ending = ""
+  if (length(ending) > 0) {
+    if (ending == "/") {
+      ending = ""
+    }
   }
   # ending = sub("^/", "", ending)
 
@@ -105,9 +109,21 @@ make_aws_call <- function(
   #   "Authorization" = Authorization,
   #   "Date" = run_date)
 
-  authenticated_url <- paste0(
-    "https://s3.amazonaws.com"
-  )
+  # authenticated_url <- paste0(
+  #   "https://",
+  #   bucket, ".",
+  #   "s3.amazonaws.com"
+  # )
+  authenticated_url = paste0("https://",
+                             bucket, ".",
+                             "s3.",
+                             region, ".",
+                             "amazonaws.com/")
+  if (!sign) {
+    L$access_key = NULL
+    L$secret_key = NULL
+  }
+
   L = list(
     url = authenticated_url,
     path = ending,

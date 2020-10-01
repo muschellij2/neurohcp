@@ -4,7 +4,9 @@
 \name{hcp_scanning_info}
 \alias{hcp_scanning_info}
 \title{Scanning Information for HCP Data}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 34406 rows and 18 columns.}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 34406 rows and 18 columns.
+}
 \usage{
 hcp_scanning_info
 }

@@ -14,7 +14,8 @@
 #' @return Character of the url to be passed to \code{httr} `VERB`s
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples
+#' if (have_aws_key()){
 #' path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
 #' hcp_aws_url(path_to_file)
 #' }
@@ -69,7 +70,7 @@ hcp_aws_url <- function(
   }
 
   authenticated_url <- paste0(
-    "https://s3.amazonaws.com/",
+    authenticated_url,
     ending,
     query)
 

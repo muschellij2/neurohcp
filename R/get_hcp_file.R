@@ -1,6 +1,7 @@
 #' @title Get HCP file
 #' @description Wraps a \code{\link{make_aws_call}} to a \code{GET}
 #' statement to get the file
+#' @param path_to_file Path to file on HCP S3 Bucket
 #' @param ... arguments to pass to \code{\link{make_aws_call}}
 #' @param verbose Should the URL be printed?
 #' @param verb passed to \code{\link{VERB}}
@@ -8,29 +9,30 @@
 #' @return Result of \code{GET}
 #' @export
 #' @importFrom httr GET VERB
-get_hcp_file = function(...,
-                        verbose = TRUE,
-                        verb = "GET") {
-  url = hcp_aws_url(..., verb = verb)
+get_hcp_file = function(
+  path_to_file = "/",
+  ...,
+  verbose = TRUE,
+  verb = "GET") {
+  # url = hcp_aws_url(path_to_file = path_to_file,..., verb = verb)
 
-  if (verbose) {
-    parsed_url = httr::parse_url(url)
-    parsed_url$query$AWSAccessKeyId = NULL
-    parsed_url$query$Signature = NULL
-    res_url = httr::build_url(parsed_url)
-    message(paste0("URL (without credentials) sent to ",
-                   verb, "\n", res_url))
-  }
-  args = list(verb = verb,
-              url = url
-  )
-  # xy= httr::VERB(verb = verb, url = url)
-  xy = do.call("VERB", args)
-  if (verbose) {
-    # message("Output of GET\n")
-    # message(xy)
-  }
-  return(xy)
+  L = make_aws_call(path_to_file = path_to_file, ...)
+
+  bucket = list(...)$bucket
+  if (is.null(bucket)) bucket = formals(hcp_aws_url)$bucket
+  query = L$query
+  query$AWSAccessKeyId = NULL
+  query$Expires = NULL
+  query$Signature = NULL
+  ret = aws.s3::s3HTTP(
+    bucket = bucket,
+    path = path_to_file,
+    verb = verb,
+    key = L$headers$access_key,
+    secret = L$headers$secret_key,
+    show_progress = verbose,
+    region = L$headers$default_region)
+  return(ret)
 }
 
 #' @rdname get_hcp_file

@@ -9,7 +9,7 @@
 \alias{head_openneuro_file}
 \title{Get HCP file}
 \usage{
-get_hcp_file(..., verbose = TRUE, verb = "GET")
+get_hcp_file(path_to_file = "/", ..., verbose = TRUE, verb = "GET")
 
 head_hcp_file(...)
 
@@ -22,6 +22,8 @@ get_openneuro_file(...)
 head_openneuro_file(...)
 }
 \arguments{
+\item{path_to_file}{Path to file on HCP S3 Bucket}
+
 \item{...}{arguments to pass to \code{\link{make_aws_call}}}
 
 \item{verbose}{Should the URL be printed?}

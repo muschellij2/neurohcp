@@ -6,8 +6,13 @@
 \alias{download_openneuro_dir}
 \title{Download an entire directory from HCP}
 \usage{
-download_hcp_dir(prefix, delimiter = "", outdir = tempfile(),
-  verbose = TRUE, ...)
+download_hcp_dir(
+  prefix,
+  delimiter = "",
+  outdir = tempfile(),
+  verbose = TRUE,
+  ...
+)
 
 download_fcp_dir(...)
 

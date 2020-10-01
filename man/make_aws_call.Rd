@@ -4,9 +4,17 @@
 \alias{make_aws_call}
 \title{Construct AWS S3 Call}
 \usage{
-make_aws_call(path_to_file = "/", bucket = "hcp-openaccess",
-  region = "us-east-1", access_key = NULL, secret_key = NULL,
-  lifetime_minutes = 5, query = NULL, verb = "GET", sign = TRUE)
+make_aws_call(
+  path_to_file = "/",
+  bucket = "hcp-openaccess",
+  region = "us-east-1",
+  access_key = NULL,
+  secret_key = NULL,
+  lifetime_minutes = 5,
+  query = NULL,
+  verb = "GET",
+  sign = TRUE
+)
 }
 \arguments{
 \item{path_to_file}{Path to file on HCP S3 Bucket}
@@ -34,7 +42,7 @@ Character of the url to be passed to \code{httr} `VERB`s
 Constructs GET information string for AWS S3 Bucket
 }
 \examples{
-\dontrun{
+if (have_aws_key()){
 path_to_file <- paste0(
    "HCP_900/100206/MNINonLinear/",
    "100206.164k_fs_LR.wb.spec")

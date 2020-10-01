@@ -24,7 +24,6 @@ download_hcp_dir = function(
   ...) {
   ret = hcp_list_files(prefix = prefix,
                        delimiter = delimiter,
-                       verbose = verbose,
                        ...)
 
   res = parse_list_files(ret)

@@ -16,6 +16,7 @@
 #' if (have_aws_key()){
 #' x = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion",
 #'    delimiter="bval")
+#' stopifnot(x$parsed_result$ListBucketResult$Name[[1]] == "hcp-openaccess")
 #' t1_niis = hcp_list_files(prefix ="HCP/100307/T1w",
 #' delimiter = ".nii.gz")
 #' all_dirs = hcp_list_dirs("HCP/")
@@ -27,21 +28,28 @@ hcp_list_files = function(
   query = NULL,
   ...
 ) {
+  L = make_aws_call(path_to_file = prefix, ...)
 
-  q = list()
-  q$prefix = prefix
-  q$delimiter = delimiter
-  query = c(q, query)
-  ret = get_hcp_file(
-    path_to_file = "",
+  bucket = list(...)$bucket
+  if (is.null(bucket)) bucket = formals(hcp_aws_url)$bucket
+  query$delimiter = delimiter
+  query$prefix = prefix
+
+  ret = aws.s3::s3HTTP(
+    bucket = bucket,
+    path = "",
+    verb = "GET",
     query = query,
-    ...)
+    key = L$headers$access_key,
+    secret = L$headers$secret_key,
+    parse_response = FALSE,
+    region = L$headers$default_region)
 
   httr::stop_for_status(ret)
   cr = httr::content(ret, as = "text", encoding = "UTF-8")
   if (cr != "") {
-    res = read_xml(cr)
-    res = as_list(res)
+    res = xml2::read_xml(cr)
+    res = xml2::as_list(res)
   } else {
     res = NULL
   }
@@ -89,8 +97,13 @@ openneuro_list_files = function(
 #' @export
 #' @examples
 #' if (have_aws_key()){
-#'  all_dirs = hcp_list_dirs("HCP/")
-#'  cr =parse_list_files(all_dirs)$prefixes
+#'   res = hcp_list_dirs("HCP/")
+#'   projects = unlist(parse_list_files(res)$prefixes)
+#'   projects = unname(projects)
+#'   projects = unname(projects)
+#'   head(projects)
+#'   head(basename(projects))
+#'   stopifnot("100307" %in% basename(projects))
 #' }
 hcp_list_dirs = function(
   prefix = "HCP/",
@@ -108,12 +121,13 @@ hcp_list_dirs = function(
 #' @export
 #' @rdname hcp_list_files
 #' @examples
-#' \dontrun{
+#' if (have_aws_key()){
 #' res = fcp_list_dirs()
 #' projects = unlist(parse_list_files(res)$prefixes)
 #' projects = unname(projects)
 #' head(projects)
 #' head(basename(projects))
+#' stopifnot("ABIDE" %in% basename(projects))
 #' }
 fcp_list_dirs = function(
   prefix = "data/Projects/",
@@ -137,6 +151,7 @@ fcp_list_dirs = function(
 #' head(projects)
 #' if (length(projects) > 0) {
 #' head(basename(projects))
+#' stopifnot("ds000002" %in% basename(projects))
 #' }
 openneuro_list_dirs  = function(
   prefix = NULL,

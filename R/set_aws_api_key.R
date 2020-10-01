@@ -19,12 +19,18 @@ set_aws_api_key = function(
   error = TRUE){
 
   if (is.null(access_key)) {
-    access_key = Sys.getenv("AWS_ACCESS_KEY_ID")
+    access_key = Sys.getenv("HCP_AWS_ACCESS_KEY_ID", unset = NA)
+    if (is.na(access_key)) {
+      access_key = Sys.getenv("AWS_ACCESS_KEY_ID")
+    }
   } else {
     Sys.setenv("AWS_ACCESS_KEY_ID" = access_key)
   }
   if (is.null(secret_key)) {
-    secret_key = Sys.getenv("AWS_SECRET_ACCESS_KEY")
+    secret_key = Sys.getenv("HCP_AWS_SECRET_ACCESS_KEY", unset = NA)
+    if (is.na(secret_key)) {
+      secret_key = Sys.getenv("AWS_SECRET_ACCESS_KEY")
+    }
   } else {
     Sys.setenv("AWS_SECRET_ACCESS_KEY" = secret_key)
   }

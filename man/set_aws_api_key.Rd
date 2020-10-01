@@ -5,8 +5,12 @@
 \alias{have_aws_key}
 \title{Set Amazon AWS Key}
 \usage{
-set_aws_api_key(access_key = NULL, secret_key = NULL,
-  default_region = "us-east-1", error = TRUE)
+set_aws_api_key(
+  access_key = NULL,
+  secret_key = NULL,
+  default_region = "us-east-1",
+  error = TRUE
+)
 
 have_aws_key()
 }

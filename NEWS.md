@@ -1,3 +1,8 @@
+# neurohcp 0.9.0
+
+* Use `aws.s3` for all signatures.
+
+
 # neurohcp 0.8.0
 
 * Fixed even more problems with endpoints.  

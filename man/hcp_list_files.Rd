@@ -43,21 +43,28 @@ Lists a set of files from an HCP bucket for a specific sub-folder
 if (have_aws_key()){
 x = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion",
    delimiter="bval")
+stopifnot(x$parsed_result$ListBucketResult$Name[[1]] == "hcp-openaccess")
 t1_niis = hcp_list_files(prefix ="HCP/100307/T1w",
 delimiter = ".nii.gz")
 all_dirs = hcp_list_dirs("HCP/")
 }
 
 if (have_aws_key()){
- all_dirs = hcp_list_dirs("HCP/")
- cr =parse_list_files(all_dirs)$prefixes
+  res = hcp_list_dirs("HCP/")
+  projects = unlist(parse_list_files(res)$prefixes)
+  projects = unname(projects)
+  projects = unname(projects)
+  head(projects)
+  head(basename(projects))
+  stopifnot("100307" \%in\% basename(projects))
 }
-\dontrun{
+if (have_aws_key()){
 res = fcp_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
 projects = unname(projects)
 head(projects)
 head(basename(projects))
+stopifnot("ABIDE" \%in\% basename(projects))
 }
 res = openneuro_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
@@ -65,5 +72,6 @@ projects = unname(projects)
 head(projects)
 if (length(projects) > 0) {
 head(basename(projects))
+stopifnot("ds000002" \%in\% basename(projects))
 }
 }
