@@ -17,7 +17,13 @@
 #' path_to_file <- paste0(
 #'    "HCP_900/100206/MNINonLinear/",
 #'    "100206.164k_fs_LR.wb.spec")
-#' make_aws_call(path_to_file)
+#' result = make_aws_call(path_to_file)
+#' # don't want this stuff printed because it has keys
+#' result$headers$secret_key = NULL
+#' result$headers$access_key = NULL
+#' result$query$AWSAccessKeyId = NULL
+#' result$query$Signature = NULL
+#' result
 #' }
 #' @importFrom digest hmac
 #' @importFrom base64enc base64encode

@@ -194,7 +194,13 @@
 <span class='no'>path_to_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(
    <span class='st'>"HCP_900/100206/MNINonLinear/"</span>,
    <span class='st'>"100206.164k_fs_LR.wb.spec"</span>)
-<span class='fu'>make_aws_call</span>(<span class='no'>path_to_file</span>)
+<span class='no'>result</span> <span class='kw'>=</span> <span class='fu'>make_aws_call</span>(<span class='no'>path_to_file</span>)
+<span class='co'># don't want this stuff printed because it has keys</span>
+<span class='no'>result</span>$<span class='no'>headers</span>$<span class='no'>secret_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+<span class='no'>result</span>$<span class='no'>headers</span>$<span class='no'>access_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+<span class='no'>result</span>$<span class='no'>query</span>$<span class='no'>AWSAccessKeyId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+<span class='no'>result</span>$<span class='no'>query</span>$<span class='no'>Signature</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+<span class='no'>result</span>
 }</div><div class='output co'>#&gt; $url
 #&gt; [1] "https://hcp-openaccess.s3.us-east-1.amazonaws.com/"
 #&gt; 
@@ -202,29 +208,17 @@
 #&gt; [1] "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
 #&gt; 
 #&gt; $query
-#&gt; $query$AWSAccessKeyId
-#&gt; [1] "AKIAXO65CT57DDYBTYFZ"
-#&gt; 
 #&gt; $query$Expires
-#&gt; [1] 1602692366
-#&gt; 
-#&gt; $query$Signature
-#&gt; [1] "Em9FDyn26dXYqS4Uh7qoA7EK8uU%3D"
+#&gt; [1] 1603111733
 #&gt; 
 #&gt; 
 #&gt; $headers
-#&gt; $headers$access_key
-#&gt; [1] "AKIAXO65CT57DDYBTYFZ"
-#&gt; 
-#&gt; $headers$secret_key
-#&gt; [1] "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"
-#&gt; 
 #&gt; $headers$default_region
 #&gt; [1] "us-east-1"
 #&gt; 
 #&gt; 
 #&gt; attr(,"canonical_string")
-#&gt; [1] "GET\n\n\n1602692366\n/HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"</div></pre>
+#&gt; [1] "GET\n\n\n1603111733\n/HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
