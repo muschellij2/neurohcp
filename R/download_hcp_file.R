@@ -32,7 +32,7 @@ download_hcp_file = function(path_to_file,
   query$AWSAccessKeyId = NULL
   query$Expires = NULL
   query$Signature = NULL
-  ret = aws.s3::s3HTTP(
+  args = list(
     bucket = bucket,
     path = path_to_file,
     verb = "GET",
@@ -42,7 +42,16 @@ download_hcp_file = function(path_to_file,
     region = L$headers$default_region,
     write_disk = httr::write_disk(
       path = destfile,
-      overwrite = TRUE))
+      overwrite = TRUE)
+  )
+  if ("require_authorization" %in% methods::formalArgs(aws.s3::s3HTTP)) {
+    sign = list(...)$sign
+    if (is.null(sign)) {
+      sign = TRUE
+    }
+    args$require_authorization = sign
+  }
+  ret = do.call(aws.s3::s3HTTP, args = args)
 
   if (error) {
     httr::stop_for_status(ret)

@@ -25,7 +25,8 @@ Imports:
     utils,
     xml2 (>= 1.0.1),
     base64enc,
-    aws.s3
+    aws.s3,
+    methods
 Suggests:
     dplyr,
     knitr,
