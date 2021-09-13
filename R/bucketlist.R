@@ -18,10 +18,16 @@ bucketlist <- function(
   secret_key = NULL,
   ...) {
 
+  L = set_aws_api_key(
+    access_key = access_key,
+    secret_key = secret_key,
+    default_region = region,
+    error = FALSE)
+
   res = aws.s3::bucket_list_df(
-    region = region,
-    key = access_key,
-    secret = secret_key,
+    region = L$region,
+    key = L$access_key,
+    secret = L$secret_key,
     ...)
   return(res)
   #

@@ -18,6 +18,17 @@
 parse_list_files = function(ret) {
   res = ret$parsed_result
   nres = names(res)
+  if (sum(nres %in% "ListBucketResult") > 1) {
+    res = res[nres %in% "ListBucketResult"]
+    result = vector(mode = 'list', length = length(res))
+    for (i in seq_along(res)) {
+      result[[i]]  = parse_list_files(list(parsed_result = res[[i]]))
+    }
+    rr = list()
+    rr$contents = do.call(rbind, lapply(result, `[[`, "contents"))
+    rr$prefixes = do.call(rbind, lapply(result, `[[`, "prefixes"))
+    return(rr)
+  }
   if ("ListBucketResult" %in% nres) {
     res = res$ListBucketResult
     nres = names(res)

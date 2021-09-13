@@ -6,6 +6,8 @@
 #' @param delimiter Delimiter to list files.  For example \code{".mat"},
 #' for ".mat"
 #' @param query Additional query arguments
+#' @param marker the marker to start the listing, needed for pagination of
+#' results
 #' @param ... additional arguments passed to \code{\link{get_hcp_file}}
 #'
 #' @return List with the result of the GET command, the parsed result, and
@@ -26,6 +28,51 @@ hcp_list_files = function(
   prefix = "",
   delimiter = NULL,
   query = NULL,
+  marker = NULL,
+  ...
+) {
+  ret = hcp_list_files_once(prefix = prefix,
+                            delimiter = delimiter,
+                            query = query,
+                            marker = marker,
+                            ...
+  )
+  extract_truncation = function(ret) {
+    is_trunc = ret$parsed_result$ListBucketResult$IsTruncated[[1]]
+    is_trunc = as.logical(is_trunc)
+  }
+  is_trunc = extract_truncation(ret)
+  get_last_marker = function(ret) {
+    res = parse_list_files(ret)
+    res = res$contents
+    marker = res$Key[nrow(res)]
+  }
+  marker = get_last_marker(ret)
+  if (is_trunc) {
+    all_data = list(ret)
+    while (is_trunc) {
+      message(paste0("New Marker is: ", marker))
+      ret2 = hcp_list_files_once(prefix = prefix,
+                                 delimiter = delimiter,
+                                 query = query,
+                                 marker = marker,
+                                 ...
+      )
+      ret$get_result = c(ret$get_result, ret2$get_result)
+      ret$content = c(ret$content, ret2$content)
+      ret$parsed_result = c(ret$parsed_result, ret2$parsed_result)
+      marker = get_last_marker(ret2)
+      is_trunc = extract_truncation(ret2)
+    }
+  }
+  ret
+}
+
+hcp_list_files_once = function(
+  prefix = "",
+  delimiter = NULL,
+  query = NULL,
+  marker = NULL,
   ...
 ) {
   L = make_aws_call(path_to_file = prefix, ...)
@@ -34,6 +81,10 @@ hcp_list_files = function(
   if (is.null(bucket)) bucket = formals(hcp_aws_url)$bucket
   query$delimiter = delimiter
   query$prefix = prefix
+  if ("marker" %in% names(prefix)) {
+    stop("Only specify marker in query itself or as an argument, not both!")
+  }
+  query$marker = marker
 
   ret = aws.s3::s3HTTP(
     bucket = bucket,
@@ -53,10 +104,11 @@ hcp_list_files = function(
   } else {
     res = NULL
   }
-  L = list(get_result = ret,
-           content = cr,
-           parsed_result = res)
-  return(L)
+  ret = list(get_result = ret,
+             content = cr,
+             parsed_result = res)
+
+  return(ret)
 }
 
 #' @export
@@ -65,6 +117,7 @@ fcp_list_files = function(
   prefix = "",
   delimiter = NULL,
   query = NULL,
+  marker = NULL,
   ...
 ) {
   hcp_list_files(
@@ -73,6 +126,7 @@ fcp_list_files = function(
     query = query,
     bucket = "openneuro",
     sign = FALSE,
+    marker = marker,
     ...)
 }
 
@@ -82,6 +136,7 @@ openneuro_list_files = function(
   prefix = "",
   delimiter = NULL,
   query = NULL,
+  marker = NULL,
   ...
 ) {
   hcp_list_files(
@@ -90,6 +145,7 @@ openneuro_list_files = function(
     query = query,
     bucket = "fcp-indi",
     sign = FALSE,
+    marker = marker,
     ...)
 }
 

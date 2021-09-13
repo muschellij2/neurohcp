@@ -9,11 +9,17 @@
 \alias{openneuro_list_dirs}
 \title{List files from HCP bucket}
 \usage{
-hcp_list_files(prefix = "", delimiter = NULL, query = NULL, ...)
+hcp_list_files(prefix = "", delimiter = NULL, query = NULL, marker = NULL, ...)
 
-fcp_list_files(prefix = "", delimiter = NULL, query = NULL, ...)
+fcp_list_files(prefix = "", delimiter = NULL, query = NULL, marker = NULL, ...)
 
-openneuro_list_files(prefix = "", delimiter = NULL, query = NULL, ...)
+openneuro_list_files(
+  prefix = "",
+  delimiter = NULL,
+  query = NULL,
+  marker = NULL,
+  ...
+)
 
 hcp_list_dirs(prefix = "HCP/", ...)
 
@@ -29,6 +35,9 @@ the root path}
 for ".mat"}
 
 \item{query}{Additional query arguments}
+
+\item{marker}{the marker to start the listing, needed for pagination of
+results}
 
 \item{...}{additional arguments passed to \code{\link{get_hcp_file}}}
 }
