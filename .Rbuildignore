@@ -12,3 +12,7 @@ data/HCP_1200_csvs/*
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.DS_Store$
+^\.*/\.DS_Store$
+^README\.Rmd$
+^\.github$

@@ -9,6 +9,7 @@
 #' @param marker the marker to start the listing, needed for pagination of
 #' results
 #' @param ... additional arguments passed to \code{\link{get_hcp_file}}
+#' @param sign Should the url be signed with an API key?
 #'
 #' @return List with the result of the GET command, the parsed result, and
 #' the content from the result.
@@ -29,13 +30,15 @@ hcp_list_files = function(
   delimiter = NULL,
   query = NULL,
   marker = NULL,
-  ...
+  ...,
+  sign = TRUE
 ) {
   ret = hcp_list_files_once(prefix = prefix,
                             delimiter = delimiter,
                             query = query,
                             marker = marker,
-                            ...
+                            ...,
+                            sign = sign
   )
   extract_truncation = function(ret) {
     is_trunc = ret$parsed_result$ListBucketResult$IsTruncated[[1]]
@@ -73,9 +76,10 @@ hcp_list_files_once = function(
   delimiter = NULL,
   query = NULL,
   marker = NULL,
-  ...
+  ...,
+  sign = TRUE
 ) {
-  L = make_aws_call(path_to_file = prefix, ...)
+  L = make_aws_call(path_to_file = prefix, ..., sign = sign)
 
   bucket = list(...)$bucket
   if (is.null(bucket)) bucket = formals(hcp_aws_url)$bucket
@@ -85,7 +89,20 @@ hcp_list_files_once = function(
     stop("Only specify marker in query itself or as an argument, not both!")
   }
   query$marker = marker
-
+  if (!sign) {
+    L$headers$access_key = ""
+    L$headers$secret_key = ""
+    env_key = Sys.getenv("AWS_ACCESS_KEY_ID")
+    on.exit({
+      Sys.setenv("AWS_ACCESS_KEY_ID" = env_key)
+    })
+    Sys.setenv(AWS_ACCESS_KEY_ID = "")
+    env_secret = Sys.getenv("AWS_SECRET_ACCESS_KEY")
+    on.exit({
+      Sys.setenv("AWS_SECRET_ACCESS_KEY" = env_secret)
+    })
+    Sys.setenv(AWS_SECRET_ACCESS_KEY = "")
+  }
   ret = aws.s3::s3HTTP(
     bucket = bucket,
     path = "",

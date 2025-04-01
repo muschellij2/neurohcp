@@ -13,7 +13,7 @@ bucketlist(region = "us-east-1", access_key = NULL, secret_key = NULL, ...)
 
 \item{secret_key}{Amazon S3 Secret Key}
 
-\item{...}{arguments to pass to \code{\link{bucket_list_df}}}
+\item{...}{arguments to pass to \code{\link[aws.s3]{bucket_list_df}}}
 }
 \value{
 List of Buckets

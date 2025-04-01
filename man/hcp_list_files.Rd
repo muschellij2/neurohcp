@@ -9,7 +9,14 @@
 \alias{openneuro_list_dirs}
 \title{List files from HCP bucket}
 \usage{
-hcp_list_files(prefix = "", delimiter = NULL, query = NULL, marker = NULL, ...)
+hcp_list_files(
+  prefix = "",
+  delimiter = NULL,
+  query = NULL,
+  marker = NULL,
+  ...,
+  sign = TRUE
+)
 
 fcp_list_files(prefix = "", delimiter = NULL, query = NULL, marker = NULL, ...)
 
@@ -40,6 +47,8 @@ for ".mat"}
 results}
 
 \item{...}{additional arguments passed to \code{\link{get_hcp_file}}}
+
+\item{sign}{Should the url be signed with an API key?}
 }
 \value{
 List with the result of the GET command, the parsed result, and

@@ -1,10 +1,10 @@
 #' @title Get HCP file
-#' @description Wraps a \code{\link{make_aws_call}} to a \code{GET}
+#' @description Wraps a \code{\link{make_aws_call}} to a \code{\link[httr]{GET}}
 #' statement to get the file
 #' @param path_to_file Path to file on HCP S3 Bucket
 #' @param ... arguments to pass to \code{\link{make_aws_call}}
 #' @param verbose Should the URL be printed?
-#' @param verb passed to \code{\link{VERB}}
+#' @param verb passed to \code{\link[httr]{VERB}}
 #'
 #' @return Result of \code{GET}
 #' @export

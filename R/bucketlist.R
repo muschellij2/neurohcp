@@ -3,7 +3,7 @@
 #' @param region Region of S3 Bucket
 #' @param access_key Amazon S3 Access Key
 #' @param secret_key Amazon S3 Secret Key
-#' @param ... arguments to pass to \code{\link{bucket_list_df}}
+#' @param ... arguments to pass to \code{\link[aws.s3]{bucket_list_df}}
 #'
 #' @return List of Buckets
 #' @export

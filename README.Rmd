@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+
+# neurohcp: Human Connectome Project Interface
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/muschellij2/neurohcp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/muschellij2/neurohcp/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+Downloads and reads data from Human 'Connectome' Project 
+    <https://db.humanconnectome.org> using Amazon Web Services ('AWS') 
+    'S3' buckets.
+
+
+## Installation
+
+You can install the development version of neurohcp from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("muschellij2/neurohcp")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(neurohcp)
+hcp_list_dirs()
+fcp_list_dirs()
+```
+

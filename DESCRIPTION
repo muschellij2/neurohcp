@@ -1,8 +1,7 @@
 Package: neurohcp
 Type: Package
 Title: Human 'Connectome' Project Interface
-Version: 0.10.0
-Date: 2021-09-08
+Version: 0.11.0
 Authors@R: c(person(given = "John",
            family = "Muschelli",
            email = "muschellij2@gmail.com",
@@ -32,7 +31,7 @@ Suggests:
     knitr,
     rmarkdown,
     covr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 URL: https://db.humanconnectome.org
 BugReports: https://github.com/muschellij2/neurohcp/issues
 VignetteBuilder: knitr

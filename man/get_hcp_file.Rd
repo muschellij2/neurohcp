@@ -28,12 +28,12 @@ head_openneuro_file(...)
 
 \item{verbose}{Should the URL be printed?}
 
-\item{verb}{passed to \code{\link{VERB}}}
+\item{verb}{passed to \code{\link[httr]{VERB}}}
 }
 \value{
 Result of \code{GET}
 }
 \description{
-Wraps a \code{\link{make_aws_call}} to a \code{GET}
+Wraps a \code{\link{make_aws_call}} to a \code{\link[httr]{GET}}
 statement to get the file
 }
