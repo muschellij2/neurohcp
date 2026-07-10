@@ -58,6 +58,7 @@ the content from the result.
 Lists a set of files from an HCP bucket for a specific sub-folder
 }
 \examples{
+\dontrun{
 if (have_aws_key()){
 x = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion",
    delimiter="bval")
@@ -66,7 +67,9 @@ t1_niis = hcp_list_files(prefix ="HCP/100307/T1w",
 delimiter = ".nii.gz")
 all_dirs = hcp_list_dirs("HCP/")
 }
+}
 
+\dontrun{
 if (have_aws_key()){
   res = hcp_list_dirs("HCP/")
   projects = unlist(parse_list_files(res)$prefixes)
@@ -76,6 +79,8 @@ if (have_aws_key()){
   head(basename(projects))
   stopifnot("100307" \%in\% basename(projects))
 }
+}
+\dontrun{
 if (have_aws_key()){
 res = fcp_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
@@ -84,6 +89,8 @@ head(projects)
 head(basename(projects))
 stopifnot("ABIDE" \%in\% basename(projects))
 }
+}
+\dontrun{
 res = openneuro_list_dirs()
 projects = unlist(parse_list_files(res)$prefixes)
 projects = unname(projects)
@@ -91,5 +98,6 @@ head(projects)
 if (length(projects) > 0) {
 head(basename(projects))
 stopifnot("ds000002" \%in\% basename(projects))
+}
 }
 }

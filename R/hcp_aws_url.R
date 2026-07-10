@@ -15,9 +15,11 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #' path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
 #' hcp_aws_url(path_to_file)
+#' }
 #' }
 #' @importFrom digest hmac
 #' @importFrom base64enc base64encode

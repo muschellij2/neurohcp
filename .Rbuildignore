@@ -16,3 +16,6 @@ data/HCP_1200_csvs/*
 ^\.*/\.DS_Store$
 ^README\.Rmd$
 ^\.github$
+^CRAN-SUBMISSION$
+^\.positai$
+^\.claude$

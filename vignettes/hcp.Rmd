@@ -53,7 +53,7 @@ if (have_aws_key()) {
 }
 ```
 
-```{r blist_go, echo = FALSE}
+```{r blist_go, echo = FALSE, eval = FALSE}
 if (have_aws_key()) {
   neurohcp::bucketlist(verbose = FALSE)
 }
@@ -95,10 +95,9 @@ ids_with_dwi = ids_with_dwi %>%
 ## Getting Data: Downloading a Single File
 We can also download a single file using `download_hcp_file`.  Here we will simply download the `bvals` file:
 
-```{r dl_file}
+```{r dl_file, eval = FALSE}
 if (have_aws_key()) {
   ret = download_hcp_file("HCP/100307/T1w/Diffusion/bvals", verbose = FALSE)
 }
 ```
-
 

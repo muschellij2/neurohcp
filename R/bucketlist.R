@@ -3,19 +3,23 @@
 #' @param region Region of S3 Bucket
 #' @param access_key Amazon S3 Access Key
 #' @param secret_key Amazon S3 Secret Key
-#' @param ... arguments to pass to \code{\link[aws.s3]{bucket_list_df}}
+#' @param verbose should progress be shown during the request?
+#' @param ... additional arguments passed to the signed S3 service request
 #'
 #' @return List of Buckets
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #' bucketlist()
+#' }
 #' }
 bucketlist <- function(
   region = "us-east-1",
   access_key = NULL,
   secret_key = NULL,
+  verbose = FALSE,
   ...) {
 
   L = set_aws_api_key(
@@ -24,12 +28,14 @@ bucketlist <- function(
     default_region = region,
     error = FALSE)
 
-  res = aws.s3::bucket_list_df(
-    region = L$region,
-    key = L$access_key,
-    secret = L$secret_key,
-    ...)
-  return(res)
+  ret = s3_service_http_request(
+    region = region,
+    access_key = L$access_key,
+    secret_key = L$secret_key,
+    show_progress = verbose,
+    ...
+  )
+  parse_bucket_list_response(ret)
   #
   # ret = get_hcp_file(
   #   path_to_file = "",

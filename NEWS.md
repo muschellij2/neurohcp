@@ -1,3 +1,8 @@
+# neurohcp 0.12.0
+
+* Removes the `aws.s3` and `aws.signature` dependencies.
+* Added tests
+
 # neurohcp 0.11.0
 
 * Fixing the \link issues with packages.

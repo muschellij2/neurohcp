@@ -42,6 +42,7 @@ Character of the url to be passed to \code{httr} `VERB`s
 Constructs GET information string for AWS S3 Bucket
 }
 \examples{
+\dontrun{
 if (have_aws_key()){
 path_to_file <- paste0(
    "HCP_900/100206/MNINonLinear/",
@@ -53,5 +54,6 @@ result$headers$access_key = NULL
 result$query$AWSAccessKeyId = NULL
 result$query$Signature = NULL
 result
+}
 }
 }

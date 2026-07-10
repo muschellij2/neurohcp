@@ -10,11 +10,13 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #'    ret = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion")
 #'    parsed = parse_list_files(ret)
 #'    stopifnot(!is.null(parsed$contents))
 #'  }
+#' }
 parse_list_files = function(ret) {
   res = ret$parsed_result
   nres = names(res)

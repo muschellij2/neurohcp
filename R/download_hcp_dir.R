@@ -12,9 +12,11 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()) {
 #'    prefix = "HCP/100307/release-notes"
 #'    res = download_hcp_dir(prefix = prefix, verbose = FALSE)
+#' }
 #' }
 download_hcp_dir = function(
   prefix,
@@ -85,4 +87,3 @@ download_openneuro_dir = function(
                    bucket = "openneuro",
                    sign = FALSE)
 }
-

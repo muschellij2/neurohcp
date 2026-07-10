@@ -5,4 +5,4 @@
 * This is a new release.
 
 ---
-Fixing the \link issues with packages.
+Removing dependency on `aws.s3` and `aws.signature` packages.
