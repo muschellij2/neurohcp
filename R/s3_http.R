@@ -81,6 +81,13 @@ s3_base_url <- function(region) {
   paste0("https://s3-", region, ".amazonaws.com")
 }
 
+s3_public_bucket_url <- function(bucket, region) {
+  if (is.null(region) || identical(region, "") || identical(region, "us-east-1")) {
+    return(paste0("https://", bucket, ".s3.amazonaws.com/"))
+  }
+  paste0("https://", bucket, ".s3-", region, ".amazonaws.com/")
+}
+
 s3_build_url <- function(bucket, path_to_file, region) {
   path_to_file = sub("^/+", "", path_to_file)
   path_parts = c(bucket, strsplit(path_to_file, "/", fixed = TRUE)[[1]])
@@ -217,12 +224,14 @@ s3_http_request <- function(
 }
 
 s3_service_http_request <- function(
+  bucket = NULL,
   region = "us-east-1",
   access_key = NULL,
   secret_key = NULL,
   lifetime_minutes = 5,
   query = NULL,
   verb = "GET",
+  sign = TRUE,
   show_progress = FALSE,
   request_options = list()
 ) {
@@ -230,18 +239,27 @@ s3_service_http_request <- function(
     access_key = access_key,
     secret_key = secret_key,
     default_region = region,
-    error = TRUE
+    error = sign
   )
 
-  url = paste0(s3_base_url(L$default_region), "/")
-  headers = s3_auth_headers(
-    url = url,
-    verb = verb,
-    region = L$default_region,
-    query = query,
-    key = L$access_key,
-    secret = L$secret_key
-  )
+  url = if (is.null(bucket)) {
+    paste0(s3_base_url(L$default_region), "/")
+  } else if (isTRUE(sign)) {
+    s3_build_url(bucket = bucket, path_to_file = "", region = L$default_region)
+  } else {
+    s3_public_bucket_url(bucket = bucket, region = L$default_region)
+  }
+  headers = list()
+  if (isTRUE(sign)) {
+    headers = s3_auth_headers(
+      url = url,
+      verb = verb,
+      region = L$default_region,
+      query = query,
+      key = L$access_key,
+      secret = L$secret_key
+    )
+  }
 
   s3_perform_request(
     verb = verb,

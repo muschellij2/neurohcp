@@ -246,6 +246,85 @@ test_that("bucketlist still returns the same data.frame structure from AWS XML",
   )
 })
 
+test_that("s3_service_http_request signs requests by default", {
+  seen = list(headers = NULL)
+
+  with_mocked_bindings(
+    neurohcp:::s3_service_http_request(),
+    set_aws_api_key = function(...) {
+      list(
+        access_key = "AKIA_TEST",
+        secret_key = "SECRET_TEST",
+        default_region = "us-east-1"
+      )
+    },
+    s3_auth_headers = function(...) list(Authorization = "test"),
+    s3_perform_request = function(verb, url, query, headers, show_progress, request_options) {
+      seen$headers <<- headers
+      structure(list(status_code = 200L), class = "response")
+    },
+    .package = "neurohcp"
+  )
+
+  expect_identical(seen$headers$Authorization, "test")
+})
+
+test_that("s3_service_http_request can make unsigned requests", {
+  seen = list(headers = NULL)
+
+  with_mocked_bindings(
+    neurohcp:::s3_service_http_request(sign = FALSE),
+    set_aws_api_key = function(...) {
+      list(
+        access_key = NULL,
+        secret_key = NULL,
+        default_region = "us-east-1"
+      )
+    },
+    s3_auth_headers = function(...) {
+      stop("should not sign unsigned requests")
+    },
+    s3_perform_request = function(verb, url, query, headers, show_progress, request_options) {
+      seen$headers <<- headers
+      structure(list(status_code = 200L), class = "response")
+    },
+    .package = "neurohcp"
+  )
+
+  expect_identical(seen$headers, list())
+})
+
+test_that("s3_service_http_request can target public bucket listings", {
+  seen = list(url = NULL, headers = NULL, query = NULL)
+
+  with_mocked_bindings(
+    neurohcp:::s3_service_http_request(
+      bucket = "fcp-indi",
+      query = list(prefix = "data/Projects/", delimiter = "/"),
+      sign = FALSE
+    ),
+    set_aws_api_key = function(...) {
+      list(
+        access_key = NULL,
+        secret_key = NULL,
+        default_region = "us-east-1"
+      )
+    },
+    s3_perform_request = function(verb, url, query, headers, show_progress, request_options) {
+      seen$url <<- url
+      seen$query <<- query
+      seen$headers <<- headers
+      structure(list(status_code = 200L), class = "response")
+    },
+    .package = "neurohcp"
+  )
+
+  expect_identical(seen$url, "https://fcp-indi.s3.amazonaws.com/")
+  expect_identical(seen$query$prefix, "data/Projects/")
+  expect_identical(seen$query$delimiter, "/")
+  expect_identical(seen$headers, list())
+})
+
 test_that("s3_http_request signs authenticated requests with SigV4 headers", {
   seen = list(headers = NULL, url = NULL, query = NULL)
   response = structure(list(status_code = 200L), class = "response")
