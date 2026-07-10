@@ -109,7 +109,7 @@ test_that("hcp_list_files_once preserves parsing and list query behavior", {
   )
 
   result = with_mocked_bindings(
-    hcp_list_files_once(
+    neurohcp:::hcp_list_files_once(
       prefix = "HCP/100307/",
       delimiter = "/",
       marker = "start",
