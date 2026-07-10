@@ -16,6 +16,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #' x = hcp_list_files(prefix = "HCP/100307/unprocessed/3T/Diffusion",
 #'    delimiter="bval")
@@ -23,6 +24,7 @@
 #' t1_niis = hcp_list_files(prefix ="HCP/100307/T1w",
 #' delimiter = ".nii.gz")
 #' all_dirs = hcp_list_dirs("HCP/")
+#' }
 #' }
 #'
 hcp_list_files = function(
@@ -79,48 +81,34 @@ hcp_list_files_once = function(
   ...,
   sign = TRUE
 ) {
-  L = make_aws_call(path_to_file = prefix, ..., sign = sign)
-
-  bucket = list(...)$bucket
+  args = list(...)
+  bucket = args$bucket
   if (is.null(bucket)) bucket = formals(hcp_aws_url)$bucket
   query$delimiter = delimiter
   query$prefix = prefix
-  if ("marker" %in% names(prefix)) {
+  if ("marker" %in% names(query)) {
     stop("Only specify marker in query itself or as an argument, not both!")
   }
   query$marker = marker
-  if (!sign) {
-    L$headers$access_key = ""
-    L$headers$secret_key = ""
-    env_key = Sys.getenv("AWS_ACCESS_KEY_ID")
-    on.exit({
-      Sys.setenv("AWS_ACCESS_KEY_ID" = env_key)
-    })
-    Sys.setenv(AWS_ACCESS_KEY_ID = "")
-    env_secret = Sys.getenv("AWS_SECRET_ACCESS_KEY")
-    on.exit({
-      Sys.setenv("AWS_SECRET_ACCESS_KEY" = env_secret)
-    })
-    Sys.setenv(AWS_SECRET_ACCESS_KEY = "")
-  }
-  ret = aws.s3::s3HTTP(
-    bucket = bucket,
-    path = "",
-    verb = "GET",
-    query = query,
-    key = L$headers$access_key,
-    secret = L$headers$secret_key,
-    parse_response = FALSE,
-    region = L$headers$default_region)
+  args$bucket = NULL
+  ret = do.call(
+    s3_http_request,
+    c(
+      list(
+        path_to_file = "",
+        bucket = bucket,
+        query = query,
+        verb = "GET",
+        sign = sign,
+        show_progress = FALSE
+      ),
+      args
+    )
+  )
 
-  httr::stop_for_status(ret)
-  cr = httr::content(ret, as = "text", encoding = "UTF-8")
-  if (cr != "") {
-    res = xml2::read_xml(cr)
-    res = xml2::as_list(res)
-  } else {
-    res = NULL
-  }
+  s3_check_status(ret)
+  cr = s3_response_text(ret)
+  res = s3_parse_xml_text(cr)
   ret = list(get_result = ret,
              content = cr,
              parsed_result = res)
@@ -169,6 +157,7 @@ openneuro_list_files = function(
 #' @rdname hcp_list_files
 #' @export
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #'   res = hcp_list_dirs("HCP/")
 #'   projects = unlist(parse_list_files(res)$prefixes)
@@ -177,6 +166,7 @@ openneuro_list_files = function(
 #'   head(projects)
 #'   head(basename(projects))
 #'   stopifnot("100307" %in% basename(projects))
+#' }
 #' }
 hcp_list_dirs = function(
   prefix = "HCP/",
@@ -194,6 +184,7 @@ hcp_list_dirs = function(
 #' @export
 #' @rdname hcp_list_files
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #' res = fcp_list_dirs()
 #' projects = unlist(parse_list_files(res)$prefixes)
@@ -201,6 +192,7 @@ hcp_list_dirs = function(
 #' head(projects)
 #' head(basename(projects))
 #' stopifnot("ABIDE" %in% basename(projects))
+#' }
 #' }
 fcp_list_dirs = function(
   prefix = "data/Projects/",
@@ -218,6 +210,7 @@ fcp_list_dirs = function(
 #' @rdname hcp_list_files
 #' @export
 #' @examples
+#' \dontrun{
 #' res = openneuro_list_dirs()
 #' projects = unlist(parse_list_files(res)$prefixes)
 #' projects = unname(projects)
@@ -225,6 +218,7 @@ fcp_list_dirs = function(
 #' if (length(projects) > 0) {
 #' head(basename(projects))
 #' stopifnot("ds000002" %in% basename(projects))
+#' }
 #' }
 openneuro_list_dirs  = function(
   prefix = NULL,
@@ -236,4 +230,3 @@ openneuro_list_dirs  = function(
     sign = FALSE,
     ...)
 }
-

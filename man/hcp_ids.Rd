@@ -16,8 +16,10 @@ Character vector
 Returns list of IDs of folders in the HCP database
 }
 \examples{
+\dontrun{
 if (have_aws_key()) {
 head(hcp_ids("HCP"))
 head(hcp_ids("HCP_900"))
+}
 }
 }

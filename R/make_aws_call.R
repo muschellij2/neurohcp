@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' if (have_aws_key()){
 #' path_to_file <- paste0(
 #'    "HCP_900/100206/MNINonLinear/",
@@ -24,6 +25,7 @@
 #' result$query$AWSAccessKeyId = NULL
 #' result$query$Signature = NULL
 #' result
+#' }
 #' }
 #' @importFrom digest hmac
 #' @importFrom base64enc base64encode

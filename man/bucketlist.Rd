@@ -4,7 +4,13 @@
 \alias{bucketlist}
 \title{Retrieve S3 Bucket List}
 \usage{
-bucketlist(region = "us-east-1", access_key = NULL, secret_key = NULL, ...)
+bucketlist(
+  region = "us-east-1",
+  access_key = NULL,
+  secret_key = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{region}{Region of S3 Bucket}
@@ -13,7 +19,9 @@ bucketlist(region = "us-east-1", access_key = NULL, secret_key = NULL, ...)
 
 \item{secret_key}{Amazon S3 Secret Key}
 
-\item{...}{arguments to pass to \code{\link[aws.s3]{bucket_list_df}}}
+\item{verbose}{should progress be shown during the request?}
+
+\item{...}{additional arguments passed to the signed S3 service request}
 }
 \value{
 List of Buckets
@@ -22,7 +30,9 @@ List of Buckets
 Lists the Buckets available with the Key/Secrete
 }
 \examples{
+\dontrun{
 if (have_aws_key()){
 bucketlist()
+}
 }
 }

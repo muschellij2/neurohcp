@@ -36,8 +36,10 @@ Output filename that was downloaded
 Downloads a file from HCP S3 Bucket
 }
 \examples{
+\dontrun{
 if (have_aws_key()){
 path_to_file <- "HCP_900/100206/MNINonLinear/100206.164k_fs_LR.wb.spec"
 download_hcp_file(path_to_file = path_to_file)
+}
 }
 }

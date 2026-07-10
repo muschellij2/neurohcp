@@ -9,3 +9,4 @@ data/HCP_1200_csvs/*
 data/HCP_Retest_csvs/*
 inst/doc
 docs
+.positai

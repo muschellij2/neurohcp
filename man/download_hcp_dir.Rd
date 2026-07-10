@@ -38,8 +38,10 @@ that did in fact download)
 Downloads a directory/folder from HCP database
 }
 \examples{
+\dontrun{
 if (have_aws_key()) {
    prefix = "HCP/100307/release-notes"
    res = download_hcp_dir(prefix = prefix, verbose = FALSE)
+}
 }
 }
