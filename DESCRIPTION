@@ -11,7 +11,7 @@ Authors@R: c(person(given = "John",
            email = "adrian.gherman@gmail.com",
            role = c("ctb")))
 Description: Downloads and reads data from Human 'Connectome' Project 
-    <https://db.humanconnectome.org> using Amazon Web Services ('AWS') 
+    <https://balsa.wustl.edu/> using Amazon Web Services ('AWS') 
     'S3' buckets.
 License: GPL-2 
 LazyData: true
@@ -31,7 +31,7 @@ Suggests:
     rmarkdown,
     covr
 Config/testthat/edition: 3
-URL: https://db.humanconnectome.org
+URL: https://balsa.wustl.edu/
 BugReports: https://github.com/muschellij2/neurohcp/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
