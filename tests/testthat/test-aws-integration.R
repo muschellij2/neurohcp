@@ -69,5 +69,5 @@ test_that("live HCP listings include the expected diffusion files when AWS crede
   parsed <- parse_list_files(result)
 
   expect_false(is.null(parsed$contents))
-  expect_true(any(grepl("/bvals$", parsed$contents$Key)))
+  expect_true(any(grepl("/bvecs$", parsed$contents$Key)))
 })
